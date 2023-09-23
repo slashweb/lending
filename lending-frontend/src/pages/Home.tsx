@@ -1,10 +1,12 @@
 import React from 'react';
 
-import Main from '../layout/MainLayout';
+import MainLayout from '../layout/MainLayout';
 
 const Home = () => {
     return (
-        <Main />
+        <MainLayout>
+            <div>asdf</div>
+        </MainLayout>
     );
 };
 
