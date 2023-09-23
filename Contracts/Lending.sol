@@ -6,8 +6,8 @@ contract Lending {
 
     address private owner;
 
-    uint256 public lasProductId = 0;
-    uint256 public lastRentId = 0;
+    uint public lasProductId = 0;
+    uint public lastRentId = 0;
 
     // Variables to that we can retreive all data to the Front End
     uint[] public allProductsIds;
