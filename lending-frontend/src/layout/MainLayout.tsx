@@ -1,8 +1,11 @@
-import React from "react";
+import * as React from "react";
 import Navbar from "../components/navbar/Navbar";
 
-export default function MainLayout() {
+export default function MainLayout({ children }: React.PropsWithChildren<{}>) {
     return (
-        <Navbar />
+        <>
+            <Navbar />
+            {children}
+        </>
     )
 }
