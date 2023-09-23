@@ -1,5 +1,5 @@
 {
-  "abi": [
+	"abi": [
 		{
 			"inputs": [],
 			"stateMutability": "nonpayable",
@@ -102,6 +102,11 @@
 					"components": [
 						{
 							"internalType": "string",
+							"name": "userId",
+							"type": "string"
+						},
+						{
+							"internalType": "string",
 							"name": "worldCoinId",
 							"type": "string"
 						},
@@ -180,6 +185,11 @@
 					"components": [
 						{
 							"internalType": "string",
+							"name": "userId",
+							"type": "string"
+						},
+						{
+							"internalType": "string",
 							"name": "worldCoinId",
 							"type": "string"
 						},
@@ -219,6 +229,11 @@
 			"outputs": [
 				{
 					"components": [
+						{
+							"internalType": "string",
+							"name": "userId",
+							"type": "string"
+						},
 						{
 							"internalType": "string",
 							"name": "worldCoinId",
@@ -262,6 +277,11 @@
 					"components": [
 						{
 							"internalType": "string",
+							"name": "userId",
+							"type": "string"
+						},
+						{
+							"internalType": "string",
 							"name": "worldCoinId",
 							"type": "string"
 						},
@@ -301,6 +321,11 @@
 			"outputs": [
 				{
 					"components": [
+						{
+							"internalType": "string",
+							"name": "userId",
+							"type": "string"
+						},
 						{
 							"internalType": "string",
 							"name": "worldCoinId",

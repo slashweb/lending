@@ -1,21 +1,19 @@
 import { Fragment, useState, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import { CheckIcon } from '@heroicons/react/24/outline'
 import TextInput from '../TextInput'
 import CustomButton from '../CustomButton'
 import { useCreateAccount } from "../../hooks/useCustomContract";
 import useWalletConnect from "../../hooks/useWalletConnect";
 
-export default function CreateUserModal({ handle }) {
+export default function CreateProductModal({ handle }) {
   const [open, setOpen] = useState(true)
-  const [username, setUsername] = useState('');
+
   const { address } = useWalletConnect();
-  const { data, write } = useCreateAccount(username, [address]);
 
-
-  useEffect(() => {
-    console.log({ data })
-  }, [data])
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [price, setPrice] = useState(0);
+  const [value, setValue] = useState(0);
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -44,12 +42,8 @@ export default function CreateUserModal({ handle }) {
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
-                <TextInput label={'Username'} onChange={(e) => setUsername(e.target.value)} value={username} />
-                <div className="mt-5 sm:mt-6">
-                  <CustomButton disabled={!username.length} onClick={() => write()}>
-                    Create Account
-                  </CustomButton>
-                </div>
+                <TextInput label={'Product Name'} onChange={(e) => setName(e.target.value)} value={name} />
+                
               </Dialog.Panel>
             </Transition.Child>
           </div>

@@ -13,7 +13,7 @@ import {
   gnosis,
   gnosisChiado,
 } from 'wagmi/chains'
-import { environment } from './utils/environment';
+import { environment } from './utils/environment.js';
 import { Provider } from 'react-redux'
 import store from './redux/store';
 
