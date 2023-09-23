@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useWeb3Modal } from '@web3modal/wagmi/react'
-import { useAccount, useDisconnect, useBalance, useNetwork } from 'wagmi'
+import { useAccount, useDisconnect, useNetwork } from 'wagmi'
 import { fetchBalance } from '@wagmi/core'
 import { useSwitchNetwork } from 'wagmi'
 

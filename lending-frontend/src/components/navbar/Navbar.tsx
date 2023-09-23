@@ -1,9 +1,12 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import useWalletConnect from '../../hooks/useWalletConnect';
 import { shortenString } from '../../utils/strings';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
+import { environment } from '../../utils/environment';
+import abi from '../../artifacts/abi.json'
+import { useContractWrite, useContractRead } from 'wagmi'
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ')
@@ -12,6 +15,32 @@ function classNames(...classes: any) {
 export default function Navbar() {
   const { openModal, disconnect, isConnected, address, chain, chains, changeNetwork, balance } = useWalletConnect();
   
+  const { data, isLoading, isSuccess, write } = useContractWrite({
+    chainId: chain?.id,
+    address: environment.CONTRACT.key as `0x${string}`,
+    abi: abi.abi,
+    functionName: 'assignLensToUser',
+  })
+
+  const createProfile = (username: string) => {
+    write({
+      args: ['vic.lens', 'vicl9403']
+    })
+  }
+
+  const { data: dataRead, isError: isErrorRead, isLoading: isLoadingRead } = useContractRead({
+    address: environment.CONTRACT.key as `0x${string}`,
+    abi: abi.abi,
+    functionName: 'getUserById',
+    args: ['vicl9403asdfasdf']
+  })
+
+  useEffect(() => {
+    console.log({
+      dataRead
+    })
+  }, [dataRead])
+
   return (
     <Disclosure as="nav" className="bg-white shadow">
       {({ open }) => (
@@ -67,6 +96,9 @@ export default function Navbar() {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                <button onClick={() => createProfile('vicl9403')}>
+                  create user
+                </button>
                 { balance && <span className="text-sm mr-2 p-2 bg-green-600 rounded-lg text-white">Balance: <b>{balance.toString()}</b></span> }
                 { chain && <span className="text-sm mr-2 p-2 bg-indigo-500 rounded-lg text-white">Network: <b>{chain.name}</b></span> }
                 {!isConnected ? 
