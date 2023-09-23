@@ -12,11 +12,6 @@ export default function CreateUserModal({ handle }) {
   const { address } = useWalletConnect();
   const { data, write } = useCreateAccount(username, [address]);
 
-
-  useEffect(() => {
-    console.log({ data })
-  }, [data])
-
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={setOpen}>

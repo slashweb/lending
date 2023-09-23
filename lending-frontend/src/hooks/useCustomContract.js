@@ -30,6 +30,20 @@ const useGetUserByWallet = (wallet) => {
     }
 }
 
+const useGetAllProducts = () => {
+    const { refetch } = useContractRead({
+        address: environment.CONTRACT.key,
+        abi: abi.abi,
+        functionName: 'getAllProducts',
+        args: [],
+        enabled: false,
+    })
+
+    return {
+        refetch
+    }
+}
+
 const useCreateAccount = (username, wallets) => {
     const { data, write } = useContractWrite({
         address: environment.CONTRACT.key,
@@ -44,5 +58,19 @@ const useCreateAccount = (username, wallets) => {
     }
 }
 
+const useCreateProduct = (userId, name) => {
+    const { data, write } = useContractWrite({
+        address: environment.CONTRACT.key,
+        abi: abi.abi,
+        functionName: 'createProductByUserId',
+        args: [userId, name],
+    })
 
-export { useGetUserById, useGetUserByWallet, useCreateAccount }
+    return {
+        data,
+        write
+    }
+}
+
+
+export { useGetUserById, useGetUserByWallet, useCreateAccount, useGetAllProducts, useCreateProduct }
