@@ -11,6 +11,108 @@
 				"type": "constructor"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "string[]",
+						"name": "_addresses",
+						"type": "string[]"
+					},
+					{
+						"internalType": "string",
+						"name": "userId",
+						"type": "string"
+					}
+				],
+				"name": "assignWalletsToUser",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "a",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "b",
+						"type": "string"
+					}
+				],
+				"name": "compareStrings",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "username",
+						"type": "string"
+					},
+					{
+						"internalType": "string[]",
+						"name": "_addresses",
+						"type": "string[]"
+					}
+				],
+				"name": "createUserAccount",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "worldCoinId",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "lensHandle",
+								"type": "string"
+							},
+							{
+								"internalType": "string[]",
+								"name": "wallets",
+								"type": "string[]"
+							}
+						],
+						"internalType": "struct Lending.User",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "key",
+						"type": "string"
+					}
+				],
+				"name": "doesKeyExist",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "getOwner",
 				"outputs": [
@@ -52,11 +154,11 @@
 	},
 	"sources": {
 		"Contracts/Lending.sol": {
-			"keccak256": "0x280277870337c5f7e270cbace4f3e7c90915aac2cc9fd8c1052ccd6bbdd6b655",
+			"keccak256": "0x3ddcb1005fa0a9753d3a7b4f0cdc68073932e511232c743727f82cc0ccf5b31c",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://8b1e26bf10bd856ff50a716f2bf2cd0a4ce927818783ae8a495324079237e652",
-				"dweb:/ipfs/Qma1nDLmMWBYgKiFgBqMgqj8HXoRYVCbbCdA3YwvyZNgSx"
+				"bzz-raw://2cb811832bdd9d9d53942b6bd7ab37b50282014ee3c0b537b68fa5b26af66868",
+				"dweb:/ipfs/QmcwoAYmqbHxsV7TgqFMY1Q7YRS7D3HmxGg8vZF6nHBuaD"
 			]
 		}
 	},
