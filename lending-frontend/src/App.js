@@ -4,6 +4,7 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Home from './pages/Home';
+import ProductDetails from './pages/ProuctDetails';
 
 function App() {
   
@@ -13,6 +14,10 @@ function App() {
         <Route 
           path="/" 
           element={<Home />}
+        />
+        <Route 
+          path="/lend" 
+          element={<ProductDetails />}
         />
       </Routes>
     </BrowserRouter>
