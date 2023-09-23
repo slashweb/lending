@@ -6,8 +6,16 @@ contract Lending {
 
     address private owner;
 
+    struct user {
+        string worldCoinId;
+        string lensHandle;
+        address[] wallets;
+    }
+
+    mapping (uint => user) users;
 
     constructor() {
+        owner = msg.sender;
     }
 
 
