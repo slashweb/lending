@@ -1,0 +1,64 @@
+{
+	"compiler": {
+		"version": "0.8.18+commit.87f61d96"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [],
+				"name": "getOwner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"Contracts/Lending.sol": "Lending"
+		},
+		"evmVersion": "paris",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"Contracts/Lending.sol": {
+			"keccak256": "0x2824dc4bfe4ff6e2b01f877e6b8e5fd7c003d10a1446fd279e15ce2d3a300aba",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://c5200e8e043ee664bdf877caa81f70bae135ded12b492ca788775815af1124bb",
+				"dweb:/ipfs/QmdByK9zsnnzYpWeyfHUVGHvPzN3EyvMNwEtUGfuu8kvtf"
+			]
+		}
+	},
+	"version": 1
+}
