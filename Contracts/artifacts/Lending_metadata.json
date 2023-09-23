@@ -13,6 +13,24 @@
 			{
 				"inputs": [
 					{
+						"internalType": "string",
+						"name": "_lens",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "userId",
+						"type": "string"
+					}
+				],
+				"name": "assignLensToUser",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "string[]",
 						"name": "_addresses",
 						"type": "string[]"
@@ -24,6 +42,24 @@
 					}
 				],
 				"name": "assignWalletsToUser",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "WCID",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "userId",
+						"type": "string"
+					}
+				],
+				"name": "assignWorldCoinIdToUser",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -99,6 +135,11 @@
 						"internalType": "string",
 						"name": "key",
 						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "variable",
+						"type": "string"
 					}
 				],
 				"name": "doesKeyExist",
@@ -120,6 +161,114 @@
 						"internalType": "address",
 						"name": "",
 						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "userId",
+						"type": "string"
+					}
+				],
+				"name": "getUserById",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "worldCoinId",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "lensHandle",
+								"type": "string"
+							},
+							{
+								"internalType": "string[]",
+								"name": "wallets",
+								"type": "string[]"
+							}
+						],
+						"internalType": "struct Lending.User",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "lens",
+						"type": "string"
+					}
+				],
+				"name": "getUserByLens",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "worldCoinId",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "lensHandle",
+								"type": "string"
+							},
+							{
+								"internalType": "string[]",
+								"name": "wallets",
+								"type": "string[]"
+							}
+						],
+						"internalType": "struct Lending.User",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "WCID",
+						"type": "string"
+					}
+				],
+				"name": "getUserByWorldCoin",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "worldCoinId",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "lensHandle",
+								"type": "string"
+							},
+							{
+								"internalType": "string[]",
+								"name": "wallets",
+								"type": "string[]"
+							}
+						],
+						"internalType": "struct Lending.User",
+						"name": "",
+						"type": "tuple"
 					}
 				],
 				"stateMutability": "view",
@@ -154,11 +303,11 @@
 	},
 	"sources": {
 		"Contracts/Lending.sol": {
-			"keccak256": "0x3ddcb1005fa0a9753d3a7b4f0cdc68073932e511232c743727f82cc0ccf5b31c",
+			"keccak256": "0x049936532c37c97f15517a70c1273a09e7daaa834ca705722d8d6b4bcbc53c6f",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://2cb811832bdd9d9d53942b6bd7ab37b50282014ee3c0b537b68fa5b26af66868",
-				"dweb:/ipfs/QmcwoAYmqbHxsV7TgqFMY1Q7YRS7D3HmxGg8vZF6nHBuaD"
+				"bzz-raw://cb474fdd62847951293125e998087b6d6fc57a7dd4b8420aeb539b3603d5dc0d",
+				"dweb:/ipfs/QmQGBSFnsRg5GszMQf9usJK3rw6xj7TdSUUtSDicX4shdW"
 			]
 		}
 	},

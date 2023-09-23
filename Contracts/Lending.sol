@@ -31,9 +31,11 @@ contract Lending {
     // Indexes to see what are the user products
     mapping (uint => uint[]) UserProducts;
     // Indexes to find user for specific worldcoin ID
-    mapping (string => uint user) WorldCoinId;
+    mapping (string => string) UserWorldCoinIds;
     // Indexes to find user for the given wallet
-    mapping (string => string user) UserWallets;
+    mapping (string => string) UserWallets;
+    // Indexes to find user for the given lens handle
+    mapping (string => string) UserLensHandles;
 
     constructor() {
         owner = msg.sender;
@@ -53,18 +55,44 @@ contract Lending {
     }
 
     // Function to check if a key exists in the mapping
-    function doesKeyExist(string memory key) public view returns (bool) {
-        // Compare the value at the specified key to the default value (an empty string)
-        return keccak256(abi.encodePacked(UserWallets[key])) != keccak256(abi.encodePacked(""));
+    function doesKeyExist(string memory key, string memory variable) public view returns (bool) {
+
+        if (compareStrings(variable, 'userWallets')) {
+            return keccak256(abi.encodePacked(UserWallets[key])) != keccak256(abi.encodePacked(""));
+        }
+
+        if (compareStrings(variable, 'userLens')) {
+            return keccak256(abi.encodePacked(UserLensHandles[key])) != keccak256(abi.encodePacked(""));
+        }
+
+        if (compareStrings(variable, 'userWCID')) {
+            return keccak256(abi.encodePacked(UserWorldCoinIds[key])) != keccak256(abi.encodePacked(""));
+        }
+
+        return false;
     }
     
     // Function to define all the wallets to specified user
     function assignWalletsToUser(string[] memory _addresses, string memory userId) public {
         for(uint i=0; i< _addresses.length; i++) {
             string memory wallet = _addresses[i];
-            if (!doesKeyExist(wallet)) {
+            if (!doesKeyExist(wallet, 'userWallets')) {
                 UserWallets[wallet] = userId;
             }
+        }
+    }
+
+    function assignLensToUser(string memory _lens, string memory userId) public {
+        if (!doesKeyExist(_lens, 'userLens')) {
+            UserLensHandles[_lens] = userId;
+            Users[userId].lensHandle = _lens;
+        }
+    }
+
+    function assignWorldCoinIdToUser(string memory WCID, string memory userId) public {
+        if (!doesKeyExist(WCID, 'userWCID')) {
+            UserWorldCoinIds[WCID] = userId;
+            Users[userId].worldCoinId = WCID;
         }
     }
 
@@ -82,6 +110,20 @@ contract Lending {
         // Return the instance of the new user
         return Users[username];
     } 
+
+    function getUserById(string memory userId) public view returns (User memory) {
+        return Users[userId];
+    }
+
+    function getUserByLens(string memory lens) public view returns (User memory) {
+        string memory userId = UserLensHandles[lens];
+        return Users[userId];
+    }
+
+    function getUserByWorldCoin(string memory WCID) public view returns (User memory) {
+        string memory userId = UserWorldCoinIds[WCID];
+        return Users[userId];
+    }
 
     function getOwner() external view returns (address) {
         return owner;
