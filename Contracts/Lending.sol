@@ -8,6 +8,7 @@ contract Lending {
 
     // General struct to define users
     struct User {
+        string userId;
         string worldCoinId;
         string lensHandle;
         string[] wallets;
@@ -109,7 +110,7 @@ contract Lending {
         uint[] memory products;
 
         // Assign the new instance of the user
-        Users[username] = User('', '', _addresses, products);
+        Users[username] = User(username,'', '', _addresses, products);
         // Define all wallets that got from user to defined username
         assignWalletsToUser(_addresses, username);
         // Return the instance of the new user

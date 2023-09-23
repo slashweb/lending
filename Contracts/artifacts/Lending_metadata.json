@@ -107,6 +107,11 @@
 						"components": [
 							{
 								"internalType": "string",
+								"name": "userId",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
 								"name": "worldCoinId",
 								"type": "string"
 							},
@@ -185,6 +190,11 @@
 						"components": [
 							{
 								"internalType": "string",
+								"name": "userId",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
 								"name": "worldCoinId",
 								"type": "string"
 							},
@@ -224,6 +234,11 @@
 				"outputs": [
 					{
 						"components": [
+							{
+								"internalType": "string",
+								"name": "userId",
+								"type": "string"
+							},
 							{
 								"internalType": "string",
 								"name": "worldCoinId",
@@ -267,6 +282,11 @@
 						"components": [
 							{
 								"internalType": "string",
+								"name": "userId",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
 								"name": "worldCoinId",
 								"type": "string"
 							},
@@ -306,6 +326,11 @@
 				"outputs": [
 					{
 						"components": [
+							{
+								"internalType": "string",
+								"name": "userId",
+								"type": "string"
+							},
 							{
 								"internalType": "string",
 								"name": "worldCoinId",
@@ -371,11 +396,11 @@
 	},
 	"sources": {
 		"Contracts/Lending.sol": {
-			"keccak256": "0x7882830e53e2bcaf0dd46ce5bf88d90937cbd65a37693b08189917eb2f1540c5",
+			"keccak256": "0x9021f210e0bec8d40d02a34e7f53a7aebbdaa5948726ccc21319da0682d5bd32",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://b2069c5a832d08776934c18ec8485da2d8fdc1b054764e3c31af1468f317ddf6",
-				"dweb:/ipfs/QmanPcby2bkRksWUCbSuKASVoKwimk1Pd9tBQuEyayeBdc"
+				"bzz-raw://5df61e474b2bb1b7ac5c2f2a7e826e4a2a978162dc8e515421f9cd6d65cccfb1",
+				"dweb:/ipfs/QmPYWdnUsMkKcZbVVWceQszjbtBgEwT79j1tYpu7eNKeRt"
 			]
 		}
 	},
