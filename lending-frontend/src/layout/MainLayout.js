@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import Navbar from "../components/navbar/Navbar";
 
 import { useSelector, useDispatch } from 'react-redux';
-import { setUserId, setHasAccount } from '../redux/reducers/app';
-import { useGetUserById, useGetUserByWallet } from "../hooks/useCustomContract";
+import { setUserId, setHasAccount, setInitialState } from '../redux/reducers/app';
+import { useGetUserById, useGetUserByWallet, useGetCurrentUser } from "../hooks/useCustomContract";
 import { useState } from "react";
 // import Contract from "../components/Contract";
 import useWalletConnect from "../hooks/useWalletConnect";
@@ -18,6 +18,7 @@ export default function MainLayout({ children }) {
     const dispatch = useDispatch();
 
     const getUserByWallet = useGetUserByWallet(address);
+    const getCurrentUser = useGetCurrentUser('sergio');
 
     useEffect(() => {
         if (!userId && address) {
@@ -31,8 +32,16 @@ export default function MainLayout({ children }) {
                 console.log({ err })
             });
         }
-        
+
     }, [userId, address]) 
+
+    useEffect(() => {
+        getCurrentUser.refetch().then((resp) => {
+            console.log('aaaass', resp)
+        }).catch((e) => {
+            console.log('vvvv', e)
+        })
+    }, [userId])
     
     return (
         <>

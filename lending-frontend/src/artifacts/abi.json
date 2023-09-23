@@ -8,6 +8,89 @@
 		{
 			"inputs": [
 				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"name": "Products",
+			"outputs": [
+				{
+					"internalType": "string",
+					"name": "userId",
+					"type": "string"
+				},
+				{
+					"internalType": "string",
+					"name": "lat",
+					"type": "string"
+				},
+				{
+					"internalType": "string",
+					"name": "lng",
+					"type": "string"
+				},
+				{
+					"internalType": "string",
+					"name": "name",
+					"type": "string"
+				},
+				{
+					"internalType": "string",
+					"name": "description",
+					"type": "string"
+				},
+				{
+					"internalType": "uint256",
+					"name": "prodValue",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "price",
+					"type": "uint256"
+				},
+				{
+					"internalType": "string",
+					"name": "image",
+					"type": "string"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "string",
+					"name": "",
+					"type": "string"
+				}
+			],
+			"name": "Users",
+			"outputs": [
+				{
+					"internalType": "string",
+					"name": "userId",
+					"type": "string"
+				},
+				{
+					"internalType": "string",
+					"name": "worldCoinId",
+					"type": "string"
+				},
+				{
+					"internalType": "string",
+					"name": "lensHandle",
+					"type": "string"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
 					"internalType": "string",
 					"name": "_lens",
 					"type": "string"
@@ -81,6 +164,54 @@
 				}
 			],
 			"stateMutability": "pure",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "string",
+					"name": "_userId",
+					"type": "string"
+				},
+				{
+					"internalType": "string",
+					"name": "_lat",
+					"type": "string"
+				},
+				{
+					"internalType": "string",
+					"name": "_lng",
+					"type": "string"
+				},
+				{
+					"internalType": "string",
+					"name": "_name",
+					"type": "string"
+				},
+				{
+					"internalType": "string",
+					"name": "_description",
+					"type": "string"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_productValue",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_price",
+					"type": "uint256"
+				},
+				{
+					"internalType": "string",
+					"name": "_image",
+					"type": "string"
+				}
+			],
+			"name": "createProduct",
+			"outputs": [],
+			"stateMutability": "nonpayable",
 			"type": "function"
 		},
 		{
@@ -357,9 +488,35 @@
 		},
 		{
 			"inputs": [],
+			"name": "lasProductId",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
 			"name": "makeRentRequest",
 			"outputs": [],
 			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "rentsNonce",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
 			"type": "function"
 		}
 	]

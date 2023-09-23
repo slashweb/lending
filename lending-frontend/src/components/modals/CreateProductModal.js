@@ -25,7 +25,11 @@ export default function CreateProductModal({ handle }) {
   const [latitude, setLatitude] = useState('40.74749012267321');
   const [longitude, setLongitude] = useState('-73.9872347180572');
 
-  const { data, write } = useCreateProduct(userId, [address]);
+  const { data, write } = useCreateProduct(userId, latitude, longitude, name, description, value, price, imageURL);
+
+  useEffect(() => {
+
+  }, [data])
 
   return (
     <Transition.Root show={open} as={Fragment}>
