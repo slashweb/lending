@@ -11,16 +11,24 @@ contract Lending {
         string worldCoinId;
         string lensHandle;
         string[] wallets;
+        uint[] products;
     }
 
     // General struct to define products
     struct Product {
+        string owner;
         string lat;
         string lng;
         string description;
         uint value;
         uint price;
         string image;
+    }
+
+    struct Rent {
+        uint productId;
+        string rentedBy;
+        bool isApproved;
     }
 
     // General products mapping
@@ -78,6 +86,7 @@ contract Lending {
             string memory wallet = _addresses[i];
             if (!doesKeyExist(wallet, 'userWallets')) {
                 UserWallets[wallet] = userId;
+                Users[userId].wallets.push(wallet);
             }
         }
     }
@@ -97,8 +106,10 @@ contract Lending {
     }
 
     function createUserAccount(string memory username, string[] memory _addresses) public returns (User memory) {
+        uint[] memory products;
+
         // Assign the new instance of the user
-        Users[username] = User('', '', _addresses);
+        Users[username] = User('', '', _addresses, products);
         // Define all wallets that got from user to defined username
         assignWalletsToUser(_addresses, username);
         // Return the instance of the new user
@@ -119,8 +130,17 @@ contract Lending {
         return Users[userId];
     }
 
+    function getUserByWallet(string memory addr) public view returns (User memory) {
+        string memory userId = UserWallets[addr];
+        return Users[userId];
+    }
+
     function getOwner() external view returns (address) {
         return owner;
+    }
+
+    function makeRentRequest() public {
+
     }
 
 } 

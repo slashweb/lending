@@ -119,6 +119,11 @@
 								"internalType": "string[]",
 								"name": "wallets",
 								"type": "string[]"
+							},
+							{
+								"internalType": "uint256[]",
+								"name": "products",
+								"type": "uint256[]"
 							}
 						],
 						"internalType": "struct Lending.User",
@@ -192,6 +197,11 @@
 								"internalType": "string[]",
 								"name": "wallets",
 								"type": "string[]"
+							},
+							{
+								"internalType": "uint256[]",
+								"name": "products",
+								"type": "uint256[]"
 							}
 						],
 						"internalType": "struct Lending.User",
@@ -228,6 +238,52 @@
 								"internalType": "string[]",
 								"name": "wallets",
 								"type": "string[]"
+							},
+							{
+								"internalType": "uint256[]",
+								"name": "products",
+								"type": "uint256[]"
+							}
+						],
+						"internalType": "struct Lending.User",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "addr",
+						"type": "string"
+					}
+				],
+				"name": "getUserByWallet",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "worldCoinId",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "lensHandle",
+								"type": "string"
+							},
+							{
+								"internalType": "string[]",
+								"name": "wallets",
+								"type": "string[]"
+							},
+							{
+								"internalType": "uint256[]",
+								"name": "products",
+								"type": "uint256[]"
 							}
 						],
 						"internalType": "struct Lending.User",
@@ -264,6 +320,11 @@
 								"internalType": "string[]",
 								"name": "wallets",
 								"type": "string[]"
+							},
+							{
+								"internalType": "uint256[]",
+								"name": "products",
+								"type": "uint256[]"
 							}
 						],
 						"internalType": "struct Lending.User",
@@ -272,6 +333,13 @@
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "makeRentRequest",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			}
 		],
@@ -303,11 +371,11 @@
 	},
 	"sources": {
 		"Contracts/Lending.sol": {
-			"keccak256": "0xf8d7eec868e649cf66172ee2e82c1faca6f4798c9a6c71ee9d431cba1bc06f90",
+			"keccak256": "0x7882830e53e2bcaf0dd46ce5bf88d90937cbd65a37693b08189917eb2f1540c5",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://ba28830fa21d4b16306be3eeba311e7339ba7ac4ba759a447fdcd19d647a3ae1",
-				"dweb:/ipfs/QmXzNSCDvKVxeyt8JP6KPBHQbmfTE3HdsB6xEWKzfjZ4Hv"
+				"bzz-raw://b2069c5a832d08776934c18ec8485da2d8fdc1b054764e3c31af1468f317ddf6",
+				"dweb:/ipfs/QmanPcby2bkRksWUCbSuKASVoKwimk1Pd9tBQuEyayeBdc"
 			]
 		}
 	},
