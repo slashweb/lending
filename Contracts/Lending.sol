@@ -6,6 +6,9 @@ contract Lending {
 
     address private owner;
 
+    uint256 public lasProductId = 0;
+    uint256 public rentsNonce = 0;
+
     // General struct to define users
     struct User {
         string userId;
@@ -17,11 +20,12 @@ contract Lending {
 
     // General struct to define products
     struct Product {
-        string owner;
+        string userId;
         string lat;
         string lng;
+        string name;
         string description;
-        uint value;
+        uint prodValue;
         uint price;
         string image;
     }
@@ -30,13 +34,19 @@ contract Lending {
         uint productId;
         string rentedBy;
         bool isApproved;
+        bool isReturned;
+        string incidence;
     }
 
     // General products mapping
-    mapping (uint => Product) Products;
+    mapping (uint => Product) public Products;
     // General users mapping
-    mapping (string => User) Users;
-
+    mapping (string => User) public Users;
+    
+    // Indexes to see the user ratings
+    mapping (string => uint[]) UserRatings;
+    // Indexes to see the user who rents ratings
+    mapping (string => uint[]) TenantRatings;
     // Indexes to see what are the user products
     mapping (uint => uint[]) UserProducts;
     // Indexes to find user for specific worldcoin ID
@@ -46,9 +56,11 @@ contract Lending {
     // Indexes to find user for the given lens handle
     mapping (string => string) UserLensHandles;
 
+
     constructor() {
         owner = msg.sender;
     }
+
 
     function compareStrings(string memory a, string memory b) public pure returns (bool) {
         if (bytes(a).length != bytes(b).length) {
@@ -141,6 +153,35 @@ contract Lending {
     }
 
     function makeRentRequest() public {
+    }
+
+    function createProduct(
+        string memory _userId,
+        string memory _lat,
+        string memory _lng,
+        string memory _name,
+        string memory _description,
+        uint _productValue, 
+        uint _price,
+        string memory _image
+    ) public  {
+        // First we ensure that the user exists
+        //User memory selectedUser = getUserById(_userId);
+
+        // When the user exists now we create new instance of the Product
+        Products[lasProductId] = Product(
+            _userId,
+            _lat,
+            _lng,
+            _name,
+            _description,
+            _productValue,
+            _price,
+            _image
+        );
+
+        Users[_userId].products.push(lasProductId);
+        lasProductId ++;
 
     }
 
