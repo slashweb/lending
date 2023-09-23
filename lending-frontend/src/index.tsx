@@ -14,6 +14,8 @@ import {
   gnosisChiado,
 } from 'wagmi/chains'
 import { environment } from './utils/environment';
+import { Provider } from 'react-redux'
+import store from './redux/store';
 
 const chains = [
   mainnet,
@@ -34,8 +36,10 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <WagmiConfig config={wagmiConfig}>
-      <App />
-    </WagmiConfig>
+    <Provider store={store}>
+      <WagmiConfig config={wagmiConfig}>
+        <App />
+      </WagmiConfig>
+    </Provider>
   </React.StrictMode>
 );
