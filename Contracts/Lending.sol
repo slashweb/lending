@@ -97,12 +97,6 @@ contract Lending {
     }
 
     function createUserAccount(string memory username, string[] memory _addresses) public returns (User memory) {
-        User memory oldUser = Users[username];
-        // Check if the user exists
-        if (oldUser.wallets.length != 0) {
-            return oldUser;
-        }
-
         // Assign the new instance of the user
         Users[username] = User('', '', _addresses);
         // Define all wallets that got from user to defined username
