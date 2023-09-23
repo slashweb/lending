@@ -26,6 +26,6 @@ export const appSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { setUserId, setHasAccount, setInitialState } = appSlice.actions
+export const { setUserId, setHasAccount, setInitialState, setIsLoading } = appSlice.actions
 
 export default appSlice.reducer

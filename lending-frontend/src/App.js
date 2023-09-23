@@ -5,20 +5,32 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Home from './pages/Home';
 import ProductDetails from './pages/ProuctDetails';
+import MyProducts from './pages/MyProducts';
+
+export const routes = [
+  {
+    path: '/',
+    element: <Home />,
+    label: 'Home',
+  },
+  {
+    path: '/my-products',
+    element: <MyProducts />,
+    label: 'My products'
+  }
+]
 
 function App() {
   
   return (
     <BrowserRouter basename="/">
       <Routes>
-        <Route 
-          path="/" 
-          element={<Home />}
-        />
-        <Route 
-          path="/lend" 
-          element={<ProductDetails />}
-        />
+        {routes.map((route, index) => (
+          <Route 
+          key={index}
+          path={route.path}
+          element={route.element}
+        />))}
       </Routes>
     </BrowserRouter>
   );

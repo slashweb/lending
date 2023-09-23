@@ -10,6 +10,7 @@ import { useContractWrite, useContractRead } from 'wagmi'
 import { useSelector } from 'react-redux';
 import CreateUserModal from '../modals/CreateUserModal';
 import { IDKitWidget } from '@worldcoin/idkit'
+import { routes } from '../../App'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -36,7 +37,7 @@ export default function Navbar() {
     if (!chain) return null;
     return (
       <>
-      { showCreateAccount && (<CreateUserModal />)}
+      { showCreateAccount && (<CreateUserModal close={() => setShowCreateAccount(false)} />)}
       <Menu as="div" className="relative inline-block text-left mr-2">
           <div>
             <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 bg-indigo-500 rounded-lg text-white">
@@ -106,12 +107,14 @@ export default function Navbar() {
                 </div>
                 <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                   {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
-                  <a
-                    href="#"
-                    className="inline-flex items-center border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium text-gray-900"
-                  >
-                    Dashboard
-                  </a>
+                  { routes.map((route) => (
+                     <a
+                     href={route.path}
+                     className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900"
+                   >
+                     {route.label}
+                   </a>
+                  ))}
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">

@@ -7,6 +7,7 @@ import { useGetUserById, useGetUserByWallet, useGetCurrentUser } from "../hooks/
 import { useState } from "react";
 // import Contract from "../components/Contract";
 import useWalletConnect from "../hooks/useWalletConnect";
+import Loader from "../components/Loader";
 
 export default function MainLayout({ children }) {
     const { address } = useWalletConnect();
@@ -18,9 +19,10 @@ export default function MainLayout({ children }) {
     const dispatch = useDispatch();
 
     const getUserByWallet = useGetUserByWallet(address);
-    const getCurrentUser = useGetCurrentUser('sergio');
+    const getCurrentUser = useGetCurrentUser(userId);
 
     useEffect(() => {
+        //dispatch(setInitialState());
         if (!userId && address) {
             getUserByWallet.refetch().then((resp) => {
                 const { data } = resp;
@@ -45,6 +47,7 @@ export default function MainLayout({ children }) {
     
     return (
         <>
+            <Loader />
             <Navbar />
             {children}
         </>

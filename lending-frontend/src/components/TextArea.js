@@ -15,7 +15,6 @@ export default function TextArea({label, ...props}) {
                         name={name}
                         id={name}
                         className="block w-full rounded-md border-0 py-1.5 pr-10 text-gray-900 ring-1 ring-inset placeholder:text-gray-300 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
-                        defaultValue={value}
                         aria-invalid="true"
                         aria-describedby="email-error"
                         value={value}

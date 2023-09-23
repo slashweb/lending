@@ -5,12 +5,39 @@ import TextInput from '../TextInput'
 import CustomButton from '../CustomButton'
 import { useCreateAccount } from "../../hooks/useCustomContract";
 import useWalletConnect from "../../hooks/useWalletConnect";
+import { useDispatch } from 'react-redux';
+import { setIsLoading } from '../../redux/reducers/app';
 
-export default function CreateUserModal({ handle }) {
+export default function CreateUserModal({ close }) {
   const [open, setOpen] = useState(true)
   const [username, setUsername] = useState('');
   const { address } = useWalletConnect();
   const { data, write } = useCreateAccount(username, [address]);
+
+  const dispatch = useDispatch();
+
+  const handleCreate = async () => {
+    dispatch(setIsLoading(true));
+
+    try {
+      await write({
+        onSuccess: () => {
+          console.log('finished')
+          dispatch(setIsLoading(false));
+          close?.();
+        },
+      });
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  useEffect(() => {
+    if (data) {
+      dispatch(setIsLoading(false));
+      close?.();
+    }
+  }, [data])
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -41,7 +68,7 @@ export default function CreateUserModal({ handle }) {
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
                 <TextInput label={'Username'} onChange={(e) => setUsername(e.target.value)} value={username} />
                 <div className="mt-5 sm:mt-6">
-                  <CustomButton disabled={!username.length} onClick={() => write()}>
+                  <CustomButton disabled={!username.length} onClick={handleCreate}>
                     Create Account
                   </CustomButton>
                 </div>

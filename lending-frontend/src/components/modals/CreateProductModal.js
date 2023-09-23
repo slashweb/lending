@@ -2,13 +2,13 @@ import { Fragment, useState, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import TextInput from '../TextInput'
 import CustomButton from '../CustomButton'
-import { useCreateAccount } from "../../hooks/useCustomContract";
 import useWalletConnect from "../../hooks/useWalletConnect";
 import TextArea from '../TextArea';
 import { useCreateProduct } from "../../hooks/useCustomContract";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setIsLoading } from '../../redux/reducers/app';
 
-export default function CreateProductModal({ handle }) {
+export default function CreateProductModal({ close }) {
   const [open, setOpen] = useState(true)
 
   const { address } = useWalletConnect();
@@ -16,6 +16,8 @@ export default function CreateProductModal({ handle }) {
   const { userId } = useSelector((state) => ({
     userId: state.app.userId
   }))
+
+  const dispatch = useDispatch();
 
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
@@ -27,13 +29,29 @@ export default function CreateProductModal({ handle }) {
 
   const { data, write } = useCreateProduct(userId, latitude, longitude, name, description, value, price, imageURL);
 
+  const handleCreate = async () => {
+    dispatch(setIsLoading(true));
+    try {
+      await write({
+        onSuccess: () => {
+          console.log('finished created product')
+          close?.();
+        },
+      });
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
   useEffect(() => {
-
+    if (data) {
+      dispatch(setIsLoading(false));
+      close?.();
+    }
   }, [data])
-
   return (
     <Transition.Root show={open} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={setOpen}>
+      <Dialog as="div" className="relative" onClose={setOpen}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -87,8 +105,8 @@ export default function CreateProductModal({ handle }) {
                 <TextInput type='number' label={'Rent price'} onChange={(e) => setPrice(e.target.value)} value={price}/>
                 <TextInput type='number' label={'Full price (in case of an incident)'} onChange={(e) => setValue(e.target.value)} value={value} />
                 <div className="mt-5 sm:mt-6">
-                  <CustomButton disabled={!name || !imageURL || !latitude || !longitude || !price || !value} onClick={() => write()}>
-                    Create Account
+                  <CustomButton disabled={!name || !imageURL || !latitude || !longitude || !price || !value} onClick={handleCreate}>
+                    Create Product
                   </CustomButton>
                 </div>
               </Dialog.Panel>
