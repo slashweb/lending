@@ -13,89 +13,6 @@
 			{
 				"inputs": [
 					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "Products",
-				"outputs": [
-					{
-						"internalType": "string",
-						"name": "userId",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "lat",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "lng",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "name",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "description",
-						"type": "string"
-					},
-					{
-						"internalType": "uint256",
-						"name": "prodValue",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "price",
-						"type": "uint256"
-					},
-					{
-						"internalType": "string",
-						"name": "image",
-						"type": "string"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
-					}
-				],
-				"name": "Users",
-				"outputs": [
-					{
-						"internalType": "string",
-						"name": "userId",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "worldCoinId",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "lensHandle",
-						"type": "string"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
 						"internalType": "string",
 						"name": "_lens",
 						"type": "string"
@@ -302,6 +219,67 @@
 						"internalType": "address",
 						"name": "",
 						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "productId",
+						"type": "uint256"
+					}
+				],
+				"name": "getProductById",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "userId",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "lat",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "lng",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "name",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "description",
+								"type": "string"
+							},
+							{
+								"internalType": "uint256",
+								"name": "prodValue",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "price",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "image",
+								"type": "string"
+							}
+						],
+						"internalType": "struct Lending.Product",
+						"name": "",
+						"type": "tuple"
 					}
 				],
 				"stateMutability": "view",
@@ -553,11 +531,11 @@
 	},
 	"sources": {
 		"Contracts/Lending.sol": {
-			"keccak256": "0xe885136c5333d3ba30c7c77db4ab35248aaeebd3dfa0558792094fa71d0c5b05",
+			"keccak256": "0xc3a3bf9532bc1af1200d275f9297b6cede40b5d186e4973752b4ceb8995314d8",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://dd53e0ccb2f75eb011a56d93c6728eaa82a0c1ca19c4ea33055f0150670adb18",
-				"dweb:/ipfs/QmZEGqxrL22WcYvGYdt9EWpSiy5WrscfCbCMigwVH6Meyn"
+				"bzz-raw://25eee3ad3e0b06fa93b08571cd86d82b22fa15b6a4567f3c221f1c9af908aed1",
+				"dweb:/ipfs/QmPivy8yzBYZrbgQc1CBEEsRvPn6VsWu5aafRQC5SEdwfo"
 			]
 		}
 	},

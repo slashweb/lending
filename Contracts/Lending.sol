@@ -39,9 +39,9 @@ contract Lending {
     }
 
     // General products mapping
-    mapping (uint => Product) public Products;
+    mapping (uint => Product) private Products;
     // General users mapping
-    mapping (string => User) public Users;
+    mapping (string => User) private Users;
     
     // Indexes to see the user ratings
     mapping (string => uint[]) UserRatings;
@@ -133,6 +133,10 @@ contract Lending {
         return Users[userId];
     }
 
+    function getProductById(uint productId) public view returns (Product memory) {
+        return Products[productId];
+    }
+
     function getUserByLens(string memory lens) public view returns (User memory) {
         string memory userId = UserLensHandles[lens];
         return Users[userId];
@@ -182,7 +186,8 @@ contract Lending {
 
         Users[_userId].products.push(lasProductId);
         lasProductId ++;
-
     }
+
+
 
 } 
