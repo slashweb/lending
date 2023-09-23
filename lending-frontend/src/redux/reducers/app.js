@@ -1,16 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-export interface AppState {
-  userId: string;
-}
-
-const initialState: AppState = {
-  userId: '',
-}
-
 export const appSlice = createSlice({
   name: 'app',
-  initialState,
+  initialState: {
+    userId: null
+  },
   reducers: {
     setUserId: (state, action) => {
       state.userId = action.payload

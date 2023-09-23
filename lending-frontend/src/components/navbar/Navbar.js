@@ -8,38 +8,41 @@ import { environment } from '../../utils/environment';
 import abi from '../../artifacts/abi.json'
 import { useContractWrite, useContractRead } from 'wagmi'
 
-function classNames(...classes: any) {
+function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 export default function Navbar() {
   const { openModal, disconnect, isConnected, address, chain, chains, changeNetwork, balance } = useWalletConnect();
   
-  const { data, isLoading, isSuccess, write } = useContractWrite({
-    chainId: chain?.id,
-    address: environment.CONTRACT.key as `0x${string}`,
-    abi: abi.abi,
-    functionName: 'assignLensToUser',
-  })
+  // const { data, isLoading, isSuccess, write } = useContractWrite({
+  //   chainId: chain?.id,
+  //   address: environment.CONTRACT.key as `0x${string}`,
+  //   abi,
+  //   functionName: 'assignLensToUser',
+  // })
 
-  const createProfile = (username: string) => {
-    write({
-      args: ['vic.lens', 'vicl9403']
-    })
-  }
+  // const createProfile = (username: string) => {
+  //   write({
+  //     args: ['vic.lens', 'vicl9403']
+  //   })
+  // }
 
-  const { data: dataRead, isError: isErrorRead, isLoading: isLoadingRead } = useContractRead({
-    address: environment.CONTRACT.key as `0x${string}`,
-    abi: abi.abi,
-    functionName: 'getUserById',
-    args: ['vicl9403asdfasdf']
-  })
+  // const { data: dataRead, isError: isErrorRead, isLoading: isLoadingRead } = useContractRead({
+  //   address: environment.CONTRACT.key as `0x${string}`,
+  //   abi,
+  //   functionName: 'getUserById',
+  //   args: ['vicl9403asdfasdf'],
+  //   onSuccess: (data) => {
+  //     console.log('succcess', data)
+  //   }
+  // })
 
-  useEffect(() => {
-    console.log({
-      dataRead
-    })
-  }, [dataRead])
+  // useEffect(() => {
+  //   console.log({
+  //     dataRead
+  //   })
+  // }, [dataRead])
 
   const renderNetworkMenu = () => {
     if (!chain) return null;

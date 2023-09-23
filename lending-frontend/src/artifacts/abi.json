@@ -1,273 +1,341 @@
 {
-    "abi": [
-      {
-        "inputs": [],
-        "stateMutability": "nonpayable",
-        "type": "constructor"
-      },
-      {
-        "inputs": [
-          {
-            "internalType": "string",
-            "name": "_lens",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "userId",
-            "type": "string"
-          }
-        ],
-        "name": "assignLensToUser",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-      },
-      {
-        "inputs": [
-          {
-            "internalType": "string[]",
-            "name": "_addresses",
-            "type": "string[]"
-          },
-          {
-            "internalType": "string",
-            "name": "userId",
-            "type": "string"
-          }
-        ],
-        "name": "assignWalletsToUser",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-      },
-      {
-        "inputs": [
-          {
-            "internalType": "string",
-            "name": "WCID",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "userId",
-            "type": "string"
-          }
-        ],
-        "name": "assignWorldCoinIdToUser",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-      },
-      {
-        "inputs": [
-          {
-            "internalType": "string",
-            "name": "a",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "b",
-            "type": "string"
-          }
-        ],
-        "name": "compareStrings",
-        "outputs": [
-          {
-            "internalType": "bool",
-            "name": "",
-            "type": "bool"
-          }
-        ],
-        "stateMutability": "pure",
-        "type": "function"
-      },
-      {
-        "inputs": [
-          {
-            "internalType": "string",
-            "name": "username",
-            "type": "string"
-          },
-          {
-            "internalType": "string[]",
-            "name": "_addresses",
-            "type": "string[]"
-          }
-        ],
-        "name": "createUserAccount",
-        "outputs": [
-          {
-            "components": [
-              {
-                "internalType": "string",
-                "name": "worldCoinId",
-                "type": "string"
-              },
-              {
-                "internalType": "string",
-                "name": "lensHandle",
-                "type": "string"
-              },
-              {
-                "internalType": "string[]",
-                "name": "wallets",
-                "type": "string[]"
-              }
-            ],
-            "internalType": "struct Lending.User",
-            "name": "",
-            "type": "tuple"
-          }
-        ],
-        "stateMutability": "nonpayable",
-        "type": "function"
-      },
-      {
-        "inputs": [
-          {
-            "internalType": "string",
-            "name": "key",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "variable",
-            "type": "string"
-          }
-        ],
-        "name": "doesKeyExist",
-        "outputs": [
-          {
-            "internalType": "bool",
-            "name": "",
-            "type": "bool"
-          }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-      },
-      {
-        "inputs": [],
-        "name": "getOwner",
-        "outputs": [
-          {
-            "internalType": "address",
-            "name": "",
-            "type": "address"
-          }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-      },
-      {
-        "inputs": [
-          {
-            "internalType": "string",
-            "name": "userId",
-            "type": "string"
-          }
-        ],
-        "name": "getUserById",
-        "outputs": [
-          {
-            "components": [
-              {
-                "internalType": "string",
-                "name": "worldCoinId",
-                "type": "string"
-              },
-              {
-                "internalType": "string",
-                "name": "lensHandle",
-                "type": "string"
-              },
-              {
-                "internalType": "string[]",
-                "name": "wallets",
-                "type": "string[]"
-              }
-            ],
-            "internalType": "struct Lending.User",
-            "name": "",
-            "type": "tuple"
-          }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-      },
-      {
-        "inputs": [
-          {
-            "internalType": "string",
-            "name": "lens",
-            "type": "string"
-          }
-        ],
-        "name": "getUserByLens",
-        "outputs": [
-          {
-            "components": [
-              {
-                "internalType": "string",
-                "name": "worldCoinId",
-                "type": "string"
-              },
-              {
-                "internalType": "string",
-                "name": "lensHandle",
-                "type": "string"
-              },
-              {
-                "internalType": "string[]",
-                "name": "wallets",
-                "type": "string[]"
-              }
-            ],
-            "internalType": "struct Lending.User",
-            "name": "",
-            "type": "tuple"
-          }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-      },
-      {
-        "inputs": [
-          {
-            "internalType": "string",
-            "name": "WCID",
-            "type": "string"
-          }
-        ],
-        "name": "getUserByWorldCoin",
-        "outputs": [
-          {
-            "components": [
-              {
-                "internalType": "string",
-                "name": "worldCoinId",
-                "type": "string"
-              },
-              {
-                "internalType": "string",
-                "name": "lensHandle",
-                "type": "string"
-              },
-              {
-                "internalType": "string[]",
-                "name": "wallets",
-                "type": "string[]"
-              }
-            ],
-            "internalType": "struct Lending.User",
-            "name": "",
-            "type": "tuple"
-          }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-      }
-    ]
-  }
+  "abi": [
+		{
+			"inputs": [],
+			"stateMutability": "nonpayable",
+			"type": "constructor"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "string",
+					"name": "_lens",
+					"type": "string"
+				},
+				{
+					"internalType": "string",
+					"name": "userId",
+					"type": "string"
+				}
+			],
+			"name": "assignLensToUser",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "string[]",
+					"name": "_addresses",
+					"type": "string[]"
+				},
+				{
+					"internalType": "string",
+					"name": "userId",
+					"type": "string"
+				}
+			],
+			"name": "assignWalletsToUser",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "string",
+					"name": "WCID",
+					"type": "string"
+				},
+				{
+					"internalType": "string",
+					"name": "userId",
+					"type": "string"
+				}
+			],
+			"name": "assignWorldCoinIdToUser",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "string",
+					"name": "a",
+					"type": "string"
+				},
+				{
+					"internalType": "string",
+					"name": "b",
+					"type": "string"
+				}
+			],
+			"name": "compareStrings",
+			"outputs": [
+				{
+					"internalType": "bool",
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"stateMutability": "pure",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "string",
+					"name": "username",
+					"type": "string"
+				},
+				{
+					"internalType": "string[]",
+					"name": "_addresses",
+					"type": "string[]"
+				}
+			],
+			"name": "createUserAccount",
+			"outputs": [
+				{
+					"components": [
+						{
+							"internalType": "string",
+							"name": "worldCoinId",
+							"type": "string"
+						},
+						{
+							"internalType": "string",
+							"name": "lensHandle",
+							"type": "string"
+						},
+						{
+							"internalType": "string[]",
+							"name": "wallets",
+							"type": "string[]"
+						},
+						{
+							"internalType": "uint256[]",
+							"name": "products",
+							"type": "uint256[]"
+						}
+					],
+					"internalType": "struct Lending.User",
+					"name": "",
+					"type": "tuple"
+				}
+			],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "string",
+					"name": "key",
+					"type": "string"
+				},
+				{
+					"internalType": "string",
+					"name": "variable",
+					"type": "string"
+				}
+			],
+			"name": "doesKeyExist",
+			"outputs": [
+				{
+					"internalType": "bool",
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "getOwner",
+			"outputs": [
+				{
+					"internalType": "address",
+					"name": "",
+					"type": "address"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "string",
+					"name": "userId",
+					"type": "string"
+				}
+			],
+			"name": "getUserById",
+			"outputs": [
+				{
+					"components": [
+						{
+							"internalType": "string",
+							"name": "worldCoinId",
+							"type": "string"
+						},
+						{
+							"internalType": "string",
+							"name": "lensHandle",
+							"type": "string"
+						},
+						{
+							"internalType": "string[]",
+							"name": "wallets",
+							"type": "string[]"
+						},
+						{
+							"internalType": "uint256[]",
+							"name": "products",
+							"type": "uint256[]"
+						}
+					],
+					"internalType": "struct Lending.User",
+					"name": "",
+					"type": "tuple"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "string",
+					"name": "lens",
+					"type": "string"
+				}
+			],
+			"name": "getUserByLens",
+			"outputs": [
+				{
+					"components": [
+						{
+							"internalType": "string",
+							"name": "worldCoinId",
+							"type": "string"
+						},
+						{
+							"internalType": "string",
+							"name": "lensHandle",
+							"type": "string"
+						},
+						{
+							"internalType": "string[]",
+							"name": "wallets",
+							"type": "string[]"
+						},
+						{
+							"internalType": "uint256[]",
+							"name": "products",
+							"type": "uint256[]"
+						}
+					],
+					"internalType": "struct Lending.User",
+					"name": "",
+					"type": "tuple"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "string",
+					"name": "addr",
+					"type": "string"
+				}
+			],
+			"name": "getUserByWallet",
+			"outputs": [
+				{
+					"components": [
+						{
+							"internalType": "string",
+							"name": "worldCoinId",
+							"type": "string"
+						},
+						{
+							"internalType": "string",
+							"name": "lensHandle",
+							"type": "string"
+						},
+						{
+							"internalType": "string[]",
+							"name": "wallets",
+							"type": "string[]"
+						},
+						{
+							"internalType": "uint256[]",
+							"name": "products",
+							"type": "uint256[]"
+						}
+					],
+					"internalType": "struct Lending.User",
+					"name": "",
+					"type": "tuple"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "string",
+					"name": "WCID",
+					"type": "string"
+				}
+			],
+			"name": "getUserByWorldCoin",
+			"outputs": [
+				{
+					"components": [
+						{
+							"internalType": "string",
+							"name": "worldCoinId",
+							"type": "string"
+						},
+						{
+							"internalType": "string",
+							"name": "lensHandle",
+							"type": "string"
+						},
+						{
+							"internalType": "string[]",
+							"name": "wallets",
+							"type": "string[]"
+						},
+						{
+							"internalType": "uint256[]",
+							"name": "products",
+							"type": "uint256[]"
+						}
+					],
+					"internalType": "struct Lending.User",
+					"name": "",
+					"type": "tuple"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "makeRentRequest",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		}
+	]
+}
