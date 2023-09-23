@@ -7,7 +7,11 @@ contract Lending {
     address private owner;
 
     uint256 public lasProductId = 0;
-    uint256 public rentsNonce = 0;
+    uint256 public lastRentId = 0;
+
+    // Variables to that we can retreive all data to the Front End
+    uint[] public allProductsIds;
+    uint[] public allRentsIds;
 
     // General struct to define users
     struct User {
@@ -16,6 +20,8 @@ contract Lending {
         string lensHandle;
         string[] wallets;
         uint[] products;
+        uint[] myLendings;
+        uint[] myBorrowings;
     }
 
     // General struct to define products
@@ -32,6 +38,7 @@ contract Lending {
 
     struct Rent {
         uint productId;
+        string owner;
         string rentedBy;
         bool isApproved;
         bool isReturned;
@@ -120,9 +127,10 @@ contract Lending {
 
     function createUserAccount(string memory username, string[] memory _addresses) public returns (User memory) {
         uint[] memory products;
+        uint[] memory rents;
 
         // Assign the new instance of the user
-        Users[username] = User(username,'', '', _addresses, products);
+        Users[username] = User(username,'', '', _addresses, products, rents, rents);
         // Define all wallets that got from user to defined username
         assignWalletsToUser(_addresses, username);
         // Return the instance of the new user
@@ -155,9 +163,17 @@ contract Lending {
     function getOwner() external view returns (address) {
         return owner;
     }
-
-    function makeRentRequest() public {
+    function getAllProducts() public view returns (uint[] memory) {
+        return allProductsIds;
     }
+
+    /*
+    function makeRentRequest(
+        string memory lending, 
+        string memory borowing
+        ) public payable {
+            require
+    }*/
 
     function createProduct(
         string memory _userId,
@@ -185,6 +201,7 @@ contract Lending {
         );
 
         Users[_userId].products.push(lasProductId);
+        allProductsIds.push(lasProductId);
         lasProductId ++;
     }
 

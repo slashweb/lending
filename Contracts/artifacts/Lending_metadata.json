@@ -13,6 +13,44 @@
 			{
 				"inputs": [
 					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "allProductsIds",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "allRentsIds",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "string",
 						"name": "_lens",
 						"type": "string"
@@ -177,6 +215,16 @@
 								"internalType": "uint256[]",
 								"name": "products",
 								"type": "uint256[]"
+							},
+							{
+								"internalType": "uint256[]",
+								"name": "myLendings",
+								"type": "uint256[]"
+							},
+							{
+								"internalType": "uint256[]",
+								"name": "myBorrowings",
+								"type": "uint256[]"
 							}
 						],
 						"internalType": "struct Lending.User",
@@ -206,6 +254,19 @@
 						"internalType": "bool",
 						"name": "",
 						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getAllProducts",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
 					}
 				],
 				"stateMutability": "view",
@@ -321,6 +382,16 @@
 								"internalType": "uint256[]",
 								"name": "products",
 								"type": "uint256[]"
+							},
+							{
+								"internalType": "uint256[]",
+								"name": "myLendings",
+								"type": "uint256[]"
+							},
+							{
+								"internalType": "uint256[]",
+								"name": "myBorrowings",
+								"type": "uint256[]"
 							}
 						],
 						"internalType": "struct Lending.User",
@@ -366,6 +437,16 @@
 							{
 								"internalType": "uint256[]",
 								"name": "products",
+								"type": "uint256[]"
+							},
+							{
+								"internalType": "uint256[]",
+								"name": "myLendings",
+								"type": "uint256[]"
+							},
+							{
+								"internalType": "uint256[]",
+								"name": "myBorrowings",
 								"type": "uint256[]"
 							}
 						],
@@ -413,6 +494,16 @@
 								"internalType": "uint256[]",
 								"name": "products",
 								"type": "uint256[]"
+							},
+							{
+								"internalType": "uint256[]",
+								"name": "myLendings",
+								"type": "uint256[]"
+							},
+							{
+								"internalType": "uint256[]",
+								"name": "myBorrowings",
+								"type": "uint256[]"
 							}
 						],
 						"internalType": "struct Lending.User",
@@ -459,6 +550,16 @@
 								"internalType": "uint256[]",
 								"name": "products",
 								"type": "uint256[]"
+							},
+							{
+								"internalType": "uint256[]",
+								"name": "myLendings",
+								"type": "uint256[]"
+							},
+							{
+								"internalType": "uint256[]",
+								"name": "myBorrowings",
+								"type": "uint256[]"
 							}
 						],
 						"internalType": "struct Lending.User",
@@ -484,14 +585,7 @@
 			},
 			{
 				"inputs": [],
-				"name": "makeRentRequest",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "rentsNonce",
+				"name": "lastRentId",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -531,11 +625,11 @@
 	},
 	"sources": {
 		"Contracts/Lending.sol": {
-			"keccak256": "0xc3a3bf9532bc1af1200d275f9297b6cede40b5d186e4973752b4ceb8995314d8",
+			"keccak256": "0x2aec44069823b0bf9e4884e0eb1b838598d99d0a72dcc423a107b467219c977b",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://25eee3ad3e0b06fa93b08571cd86d82b22fa15b6a4567f3c221f1c9af908aed1",
-				"dweb:/ipfs/QmPivy8yzBYZrbgQc1CBEEsRvPn6VsWu5aafRQC5SEdwfo"
+				"bzz-raw://bdfeecfa819f9a155003839b86138fa4d028e18640f2781605a6a7f7c598063b",
+				"dweb:/ipfs/QmfJqdneH3CdgSuQfaem4iuvD8mQswUVhV41jmU2kusNBZ"
 			]
 		}
 	},
