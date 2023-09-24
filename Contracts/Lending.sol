@@ -26,6 +26,7 @@ contract Lending {
 
     // General struct to define products
     struct Product {
+        uint id;
         string userId;
         string lat;
         string lng;
@@ -188,6 +189,7 @@ contract Lending {
 
         // When the user exists now we create new instance of the Product
         Products[lasProductId] = Product(
+            lasProductId,
             _userId,
             _lat,
             _lng,
