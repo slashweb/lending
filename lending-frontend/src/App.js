@@ -12,16 +12,19 @@ export const routes = [
     path: '/',
     element: <Home />,
     label: 'Home',
+    enableInNavbar: true,
   },
   {
     path: '/my-products',
     element: <MyProducts />,
-    label: 'My products'
+    label: 'My products',
+    enableInNavbar: true,
   },
   {
     path: '/product/:id',
     element: <ProductDetails />,
-    label: 'Product'
+    label: 'Product',
+    enableInNavbar: false,
   }
 ]
 
