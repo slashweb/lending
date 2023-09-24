@@ -3,9 +3,11 @@ import { useState, useEffect } from 'react'
 import { CheckIcon, QuestionMarkCircleIcon, StarIcon } from '@heroicons/react/20/solid'
 import { RadioGroup } from '@headlessui/react'
 import { ShieldCheckIcon } from '@heroicons/react/24/outline'
-import { useGetProductById, useGetCurrentUser } from '../hooks/useCustomContract'
+import { useGetProductById, useGetCurrentUser, useMakeRentRequest } from '../hooks/useCustomContract'
 import Loader from './Loader'
 import UserLens from './UserLens'
+import { useSelector } from 'react-redux'
+import { redirect } from "react-router-dom";
 
 const reviews = { average: 4, totalCount: 1624 }
 
@@ -16,23 +18,39 @@ function classNames(...classes) {
 export default function ProductDetailItem({ id }) {
   const [product, setProduct] = useState();
   const [owner, setOwner] = useState();
+  const { userId } = useSelector((state) => ({
+    userId: state.app.profile.userId
+  }))
   
   const { refetch } = useGetProductById(id)
   const { refetch: refetchGetOwner } = useGetCurrentUser(product?.userId);
 
+  const { data, write } = useMakeRentRequest();
+
+
   useEffect(() => {
     refetch().then(res => {
-        console.log('res from fer', res.data)
         setProduct(res.data)
     })
   }, [])
 
   useEffect(() => {
     refetchGetOwner().then(res => {
-      console.log('owner', res.data)
       setOwner(res.data)
   })
   }, [product])
+
+  const handleRentRequest = async () => {
+    await write({
+      args: [product.userId, userId, product.id]
+    })
+  }
+
+  useEffect(() => {
+    if (data) {
+      window.location.href = '/rents';
+    }
+  }, [data])
 
   if (!product) {
     return <Loader />
@@ -121,16 +139,16 @@ export default function ProductDetailItem({ id }) {
               Product options
             </h2>
 
-            <form>
+            
               <div className="mt-10">
                 <button
-                  type="submit"
+                  onClick={handleRentRequest}
                   className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
                 >
                   Rent product
                 </button>
               </div>
-            </form>
+            
           </section>
         </div>
       </div>

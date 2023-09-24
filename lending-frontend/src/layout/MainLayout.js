@@ -14,12 +14,12 @@ import { IDKitWidget } from '@worldcoin/idkit'
 
 export default function MainLayout({ children }) {
     const { address } = useWalletConnect();
+    const dispatch = useDispatch();
 
     const { profile, hasAccount } = useSelector((state) => ({
         profile: state.app.profile,
         hasAccount: state.app.hasAccount,
     }))
-
     
     const { write } = useAssignWorldCoinIdToUser();
 
@@ -38,7 +38,7 @@ export default function MainLayout({ children }) {
     }
 
     const userId = profile.userId;
-    const dispatch = useDispatch();
+    
     
 
     const { refetch } = useGetCurrentUser(profile.userId);
@@ -57,12 +57,13 @@ export default function MainLayout({ children }) {
 
     useEffect(() => {
         if (!userId && address) {   
-            
             usrByWallet.refetch().then((resp) => {
                 const { data } = resp;
                 if (data.wallets.length > 0) {
                     dispatch(setHasAccount(true));
                     dispatch(setProfile(data));
+                } else {
+                    dispatch(setHasAccount(false));
                 }
             }).catch((err) => {
                 console.log({ err })

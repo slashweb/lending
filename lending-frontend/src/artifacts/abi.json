@@ -46,6 +46,24 @@
 		{
 			"inputs": [
 				{
+					"internalType": "bool",
+					"name": "status",
+					"type": "bool"
+				},
+				{
+					"internalType": "uint256",
+					"name": "rentId",
+					"type": "uint256"
+				}
+			],
+			"name": "approveRent",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
 					"internalType": "string",
 					"name": "_lens",
 					"type": "string"
@@ -269,6 +287,19 @@
 		},
 		{
 			"inputs": [],
+			"name": "getAllRents",
+			"outputs": [
+				{
+					"internalType": "uint256[]",
+					"name": "",
+					"type": "uint256[]"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
 			"name": "getOwner",
 			"outputs": [
 				{
@@ -339,6 +370,62 @@
 						}
 					],
 					"internalType": "struct Lending.Product",
+					"name": "",
+					"type": "tuple"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "rentId",
+					"type": "uint256"
+				}
+			],
+			"name": "getRent",
+			"outputs": [
+				{
+					"components": [
+						{
+							"internalType": "uint256",
+							"name": "id",
+							"type": "uint256"
+						},
+						{
+							"internalType": "uint256",
+							"name": "productId",
+							"type": "uint256"
+						},
+						{
+							"internalType": "string",
+							"name": "owner",
+							"type": "string"
+						},
+						{
+							"internalType": "string",
+							"name": "rentedBy",
+							"type": "string"
+						},
+						{
+							"internalType": "bool",
+							"name": "isApproved",
+							"type": "bool"
+						},
+						{
+							"internalType": "bool",
+							"name": "isReturned",
+							"type": "bool"
+						},
+						{
+							"internalType": "string",
+							"name": "incidence",
+							"type": "string"
+						}
+					],
+					"internalType": "struct Lending.Rent",
 					"name": "",
 					"type": "tuple"
 				}
@@ -594,6 +681,65 @@
 				}
 			],
 			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "string",
+					"name": "lending",
+					"type": "string"
+				},
+				{
+					"internalType": "string",
+					"name": "borowing",
+					"type": "string"
+				},
+				{
+					"internalType": "uint256",
+					"name": "productId",
+					"type": "uint256"
+				}
+			],
+			"name": "makeRentRequest",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "bool",
+					"name": "status",
+					"type": "bool"
+				},
+				{
+					"internalType": "uint256",
+					"name": "rentId",
+					"type": "uint256"
+				}
+			],
+			"name": "returnRent",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "string",
+					"name": "_incidence",
+					"type": "string"
+				},
+				{
+					"internalType": "uint256",
+					"name": "rentId",
+					"type": "uint256"
+				}
+			],
+			"name": "setIncidence",
+			"outputs": [],
+			"stateMutability": "nonpayable",
 			"type": "function"
 		}
 	]

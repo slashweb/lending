@@ -43,7 +43,7 @@ export default function Navbar() {
         <Menu as="div" className="relative inline-block text-left mr-2">
           <div>
             <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 bg-indigo-500 rounded-lg text-white">
-              Network: <b> {chain.name} </b>
+              <b> {chain.name} </b>
               <ChevronDownIcon
                 className="-mr-1 h-5 w-5 text-gray-400"
                 aria-hidden="true"
@@ -168,14 +168,14 @@ export default function Navbar() {
                     </div>
                     {balance && (
                       <span className="text-sm mr-2 p-2 bg-green-600 rounded-lg text-white">
-                        Balance: <b>{balance.toString()}</b>
+                        <b>{balance.toString()}</b>
                       </span>
                     )}
                     {renderNetworkMenu()}
                     <Menu as="div" className="relative inline-block text-left">
                       <div>
                         <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-                          Connected as <b>{shortenString(address)}</b>
+                          <b>{shortenString(address)}</b>
                           <ChevronDownIcon
                             className="-mr-1 h-5 w-5 text-gray-400"
                             aria-hidden="true"
