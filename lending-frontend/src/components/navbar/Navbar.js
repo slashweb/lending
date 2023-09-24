@@ -13,6 +13,7 @@ import { routes } from '../../App'
 import IntegrateLensModal from '../modals/IntegrateLensModal';
 import IconButton from '../IconButton';
 import CreateProductModal from '../modals/CreateProductModal';
+import LensAuth from '../LensAuth';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -115,15 +116,17 @@ export default function Navbar() {
                 </div>
                 <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                   {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
-                  {routes.filter((route) => route.enableInNavbar).map((route) => (
-                    <a
-                      key={route.path}
-                      href={route.path}
-                      className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900"
-                    >
-                      {route.label}
-                    </a>
-                  ))}
+                  {routes
+                    .filter((route) => route.enableInNavbar)
+                    .map((route) => (
+                      <a
+                        key={route.path}
+                        href={route.path}
+                        className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900"
+                      >
+                        {route.label}
+                      </a>
+                    ))}
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
@@ -201,9 +204,7 @@ export default function Navbar() {
                                       : "text-gray-700",
                                     "block px-4 py-2 text-sm"
                                   )}
-                                >
-                                  
-                                </a>
+                                ></a>
                               )}
                             </Menu.Item>
                             <Menu.Item>

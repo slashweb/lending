@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Navbar from "../components/navbar/Navbar";
 
 import { useSelector, useDispatch } from 'react-redux';
-import { setProfile, setHasAccount, setInitialState } from '../redux/reducers/app';
+import { setProfile, setHasAccount, setInitialState, setIsLoading } from '../redux/reducers/app';
 import { useGetUserById, useGetUserByWallet, useGetCurrentUser, useAssignWorldCoinIdToUser } from "../hooks/useCustomContract";
 import { useState } from "react";
 // import Contract from "../components/Contract";
@@ -20,6 +20,7 @@ export default function MainLayout({ children }) {
         hasAccount: state.app.hasAccount,
     }))
 
+    
     const { write } = useAssignWorldCoinIdToUser();
 
     const handleSuccess = async (data) => {
@@ -38,6 +39,7 @@ export default function MainLayout({ children }) {
 
     const userId = profile.userId;
     const dispatch = useDispatch();
+    
 
     const { refetch } = useGetCurrentUser(profile.userId);
     
@@ -45,7 +47,7 @@ export default function MainLayout({ children }) {
 
     useEffect(() => {
         refetch?.().then(res => {
-            const newProfile = { ...res.data }
+            const newProfile = { products: [], ...res.data }
             if (!newProfile) return;
 
             newProfile.products = newProfile?.products.map(id => Number(id));

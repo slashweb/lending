@@ -116,12 +116,11 @@ const useCreateProduct = (userId, latitude, longitude, name, description, produc
     }
 }
 
-const useAssignLensToUser = (userId, handle) => {
+const useAssignLensToUser = () => {
     const { data, write, isError, isLoading, isSuccess, error, status, writeAsync } = useContractWrite({
         address: environment.CONTRACT.key,
         abi: abi.abi,
         functionName: 'assignLensToUser',
-        args: [handle, userId],
     })
 
     return {
