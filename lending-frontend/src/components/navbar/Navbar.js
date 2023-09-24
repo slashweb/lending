@@ -12,6 +12,8 @@ import CreateUserModal from '../modals/CreateUserModal';
 import { IDKitWidget } from '@worldcoin/idkit'
 import { routes } from '../../App'
 import IntegrateLensModal from '../modals/IntegrateLensModal';
+import IconButton from '../IconButton';
+import CreateProductModal from '../modals/CreateProductModal';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -22,6 +24,7 @@ export default function Navbar() {
   
   const [showCreateAccount, setShowCreateAccount] = useState(false);
   const [showIntegrateLens, setShowIntegrateLens] = useState(false);
+  const [openProductCreationModal, setOpenProductCreationModal] = useState(false)
 
   const { userHasAccount } = useSelector((state) => ({
     userHasAccount: state.app.hasAccount,
@@ -39,13 +42,20 @@ export default function Navbar() {
     if (!chain) return null;
     return (
       <>
-      { showCreateAccount && (<CreateUserModal close={() => setShowCreateAccount(false)} />)}
-      { showIntegrateLens && (<IntegrateLensModal close={() => setShowIntegrateLens(false)} />)}
-      <Menu as="div" className="relative inline-block text-left mr-2">
+        {showCreateAccount && (
+          <CreateUserModal close={() => setShowCreateAccount(false)} />
+        )}
+        {showIntegrateLens && (
+          <IntegrateLensModal close={() => setShowIntegrateLens(false)} />
+        )}
+        <Menu as="div" className="relative inline-block text-left mr-2">
           <div>
             <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 bg-indigo-500 rounded-lg text-white">
-                Network: <b> {chain.name} </b>
-              <ChevronDownIcon className="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
+              Network: <b> {chain.name} </b>
+              <ChevronDownIcon
+                className="-mr-1 h-5 w-5 text-gray-400"
+                aria-hidden="true"
+              />
             </Menu.Button>
           </div>
 
@@ -60,26 +70,30 @@ export default function Navbar() {
           >
             <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
               <div className="py-1">
-                {chains.length > 1 && chains.map((item) => (
-                  <Menu.Item key={item.name}>
-                  {({ active }) => (
-                    <a
-                      onClick={() => changeNetwork(item.id)}
-                      className={classNames(
-                        item.id === chain.id  ? 'bg-gray-100 text-gray-900 font-bold' : 'text-gray-700',
-                        'block px-4 py-2 text-sm'
+                {chains.length > 1 &&
+                  chains.map((item) => (
+                    <Menu.Item key={item.name}>
+                      {({ active }) => (
+                        <a
+                          onClick={() => changeNetwork(item.id)}
+                          className={classNames(
+                            item.id === chain.id
+                              ? "bg-gray-100 text-gray-900 font-bold"
+                              : "text-gray-700",
+                            "block px-4 py-2 text-sm"
+                          )}
+                        >
+                          {item.name}
+                        </a>
                       )}
-                    >
-                      {item.name}
-                    </a>
-                  )}
-                </Menu.Item>))}
+                    </Menu.Item>
+                  ))}
               </div>
             </Menu.Items>
           </Transition>
         </Menu>
       </>
-    )
+    );
   }
 
   return (
@@ -110,108 +124,159 @@ export default function Navbar() {
                 </div>
                 <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                   {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
-                  { routes.map((route) => (
-                     <a
-                     key={route.path}
-                     href={route.path}
-                     className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900"
-                   >
-                     {route.label}
-                   </a>
+                  {routes.map((route) => (
+                    <a
+                      key={route.path}
+                      href={route.path}
+                      className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900"
+                    >
+                      {route.label}
+                    </a>
                   ))}
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                {!isConnected ? 
-                <button
-                  onClick={() => openModal()}
-                  type="button"
-                  className="relative rounded-full bg-white p-1"
-                >                  
-                  <span>Sign in with <b>WalletConnect</b></span>
-                </button>
-                : (
-                  <>
-                  { !userHasAccount && <button onClick={() => setShowCreateAccount(true)} className="text-sm mr-2 p-2 bg-orange-600 rounded-lg text-white">Create Account</button> }
-                  { balance && <span className="text-sm mr-2 p-2 bg-green-600 rounded-lg text-white">Balance: <b>{balance.toString()}</b></span> }
-                  { renderNetworkMenu() }
-                  <Menu as="div" className="relative inline-block text-left">
-                  <div>
-                    <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-                      Connected as <b>{shortenString(address)}</b>
-                      <ChevronDownIcon className="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
-                    </Menu.Button>
-                  </div>
-
-                  <Transition
-                    as={Fragment}
-                    enter="transition ease-out duration-100"
-                    enterFrom="transform opacity-0 scale-95"
-                    enterTo="transform opacity-100 scale-100"
-                    leave="transition ease-in duration-75"
-                    leaveFrom="transform opacity-100 scale-100"
-                    leaveTo="transform opacity-0 scale-95"
+                {!isConnected ? (
+                  <button
+                    onClick={() => openModal()}
+                    type="button"
+                    className="relative rounded-full bg-white p-1"
                   >
-                    <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      <div className="py-1">
-                      <Menu.Item>
-                          {({ active }) => (
-                            <a
-                              onClick={() => {}}
-                              className={classNames(
-                                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                'block px-4 py-2 text-sm'
-                              )}
-                            >
-                              <IDKitWidget
-                                app_id={environment.WORLDCOIN.APP_ID}
-                                action="some-action"
-                                onSuccess={handleSuccess}
-                                handleVerify={handleVerify}
-                                credential_types={['orb']}
-                              >
-                                {({ open }) => <div className='flex'>
-                                <button onClick={open} className="mr-2">Verify with World ID </button>
-                                <img width={20} src="https://images.prismic.io/worldcoin-company-website/80f08f79-ecb6-44d9-915f-85d40a9d98b9_logo.png?auto=compress,format"></img></div>}
-                              </IDKitWidget>
-                            </a>
-                          )}
-                        </Menu.Item>
-                        <Menu.Item>
-                          {({ active }) => (
-                            <a
-                              onClick={() => setShowIntegrateLens(true)}
-                              className={classNames(
-                                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                'block px-4 py-2 text-sm'
-                              )}
-                            >
-                              <div className='flex'>
-                                <span className='mr-2'>Integrate with Lens</span>
-                                <img width={20} src="https://lens-dev-docs.vercel.app/logo.png"></img>
-                              </div>
-                            </a>
-                          )}
-                        </Menu.Item>
-                        <Menu.Item>
-                          {({ active }) => (
-                            <a
-                              onClick={() => disconnect()}
-                              className={classNames(
-                                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                'block px-4 py-2 text-sm'
-                              )}
-                            >
-                              <b>Sign out</b>
-                            </a>
-                          )}
-                        </Menu.Item>
+                    <span>
+                      Sign in with <b>WalletConnect</b>
+                    </span>
+                  </button>
+                ) : (
+                  <>
+                    {!userHasAccount && (
+                      <button
+                        onClick={() => setShowCreateAccount(true)}
+                        className="text-sm mr-2 p-2 bg-orange-600 rounded-lg text-white"
+                      >
+                        Create Account
+                      </button>
+                    )}
+                    <div className="flex justify-between mr-2">
+                      {userHasAccount && (
+                        <IconButton
+                          onClick={() => {
+                            setOpenProductCreationModal(true);
+                          }}
+                        >
+                          +
+                        </IconButton>
+                      )}
+                      {openProductCreationModal && (
+                        <CreateProductModal
+                          close={() => setOpenProductCreationModal(false)}
+                        />
+                      )}
+                    </div>
+                    {balance && (
+                      <span className="text-sm mr-2 p-2 bg-green-600 rounded-lg text-white">
+                        Balance: <b>{balance.toString()}</b>
+                      </span>
+                    )}
+                    {renderNetworkMenu()}
+                    <Menu as="div" className="relative inline-block text-left">
+                      <div>
+                        <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+                          Connected as <b>{shortenString(address)}</b>
+                          <ChevronDownIcon
+                            className="-mr-1 h-5 w-5 text-gray-400"
+                            aria-hidden="true"
+                          />
+                        </Menu.Button>
                       </div>
-                    </Menu.Items>
-                  </Transition>
-                </Menu>
-                </>)
-                }
+
+                      <Transition
+                        as={Fragment}
+                        enter="transition ease-out duration-100"
+                        enterFrom="transform opacity-0 scale-95"
+                        enterTo="transform opacity-100 scale-100"
+                        leave="transition ease-in duration-75"
+                        leaveFrom="transform opacity-100 scale-100"
+                        leaveTo="transform opacity-0 scale-95"
+                      >
+                        <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                          <div className="py-1">
+                            <Menu.Item>
+                              {({ active }) => (
+                                <a
+                                  onClick={() => {}}
+                                  className={classNames(
+                                    active
+                                      ? "bg-gray-100 text-gray-900"
+                                      : "text-gray-700",
+                                    "block px-4 py-2 text-sm"
+                                  )}
+                                >
+                                  <IDKitWidget
+                                    app_id={environment.WORLDCOIN.APP_ID}
+                                    action="some-action"
+                                    onSuccess={handleSuccess}
+                                    handleVerify={handleVerify}
+                                    credential_types={["orb"]}
+                                  >
+                                    {({ open }) => (
+                                      <div className="flex">
+                                        <button onClick={open} className="mr-2">
+                                          Verify with World ID{" "}
+                                        </button>
+                                        <img
+                                          width={20}
+                                          src="https://images.prismic.io/worldcoin-company-website/80f08f79-ecb6-44d9-915f-85d40a9d98b9_logo.png?auto=compress,format"
+                                        ></img>
+                                      </div>
+                                    )}
+                                  </IDKitWidget>
+                                </a>
+                              )}
+                            </Menu.Item>
+                            <Menu.Item>
+                              {({ active }) => (
+                                <a
+                                  onClick={() => setShowIntegrateLens(true)}
+                                  className={classNames(
+                                    active
+                                      ? "bg-gray-100 text-gray-900"
+                                      : "text-gray-700",
+                                    "block px-4 py-2 text-sm"
+                                  )}
+                                >
+                                  <div className="flex">
+                                    <span className="mr-2">
+                                      Integrate with Lens
+                                    </span>
+                                    <img
+                                      width={20}
+                                      src="https://lens-dev-docs.vercel.app/logo.png"
+                                    ></img>
+                                  </div>
+                                </a>
+                              )}
+                            </Menu.Item>
+                            <Menu.Item>
+                              {({ active }) => (
+                                <a
+                                  onClick={() => disconnect()}
+                                  className={classNames(
+                                    active
+                                      ? "bg-gray-100 text-gray-900"
+                                      : "text-gray-700",
+                                    "block px-4 py-2 text-sm"
+                                  )}
+                                >
+                                  <b>Sign out</b>
+                                </a>
+                              )}
+                            </Menu.Item>
+                          </div>
+                        </Menu.Items>
+                      </Transition>
+                    </Menu>
+                  </>
+                )}
 
                 <button
                   type="button"
@@ -245,25 +310,34 @@ export default function Navbar() {
                   >
                     <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                       {isConnected ? (
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                          >
-                            Connected as <b>{shortenString(address)}</b>
-                          </a>
-                        )}
-                      </Menu.Item>) : (<Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href='#'
-                            onClick={() => openModal()}
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                          >
-                            Sign in with <b>WalletConnect</b>
-                          </a>
-                        )}
-                      </Menu.Item>)}
+                        <Menu.Item>
+                          {({ active }) => (
+                            <a
+                              className={classNames(
+                                active ? "bg-gray-100" : "",
+                                "block px-4 py-2 text-sm text-gray-700"
+                              )}
+                            >
+                              Connected as <b>{shortenString(address)}</b>
+                            </a>
+                          )}
+                        </Menu.Item>
+                      ) : (
+                        <Menu.Item>
+                          {({ active }) => (
+                            <a
+                              href="#"
+                              onClick={() => openModal()}
+                              className={classNames(
+                                active ? "bg-gray-100" : "",
+                                "block px-4 py-2 text-sm text-gray-700"
+                              )}
+                            >
+                              Sign in with <b>WalletConnect</b>
+                            </a>
+                          )}
+                        </Menu.Item>
+                      )}
                     </Menu.Items>
                   </Transition>
                 </Menu>
@@ -307,5 +381,5 @@ export default function Navbar() {
         </>
       )}
     </Disclosure>
-  )
+  );
 }

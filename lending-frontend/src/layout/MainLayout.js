@@ -20,24 +20,26 @@ export default function MainLayout({ children }) {
     const userId = profile.userId;
     const dispatch = useDispatch();
 
-    const { refetch } = useGetCurrentUser(profile.userId)
+
+    const { refetch } = useGetCurrentUser(profile.userId);
+    
+    const usrByWallet = useGetUserByWallet(address)
 
 
     useEffect(() => {
-        refetch().then(res => {
+        refetch?.().then(res => {
             const newProfile = res.data 
             newProfile.products = newProfile.products.map(id => Number(id)) || [] 
-            //dispatch(setProfile(newProfile));
+            dispatch(setProfile(newProfile));
         })
     }, [])
 
     useEffect(() => {
         if (!userId && address) {   
-            refetch().then((resp) => {
+            
+            usrByWallet.refetch().then((resp) => {
                 const { data } = resp;
-                console.log('data here', data, resp)
                 if (data.wallets.length > 0) {
-                    console.log('was here')
                     dispatch(setHasAccount(true));
                     dispatch(setProfile(data));
                 }

@@ -4,7 +4,7 @@ const config = {
             PROYECT_ID: 'afbc50dd45344f9efbad7a3c05239c56'
         },
         CONTRACT: {
-            key: '0xA0dcB46D379e97CC1e4603697bcB6D5383a427B6'
+            key: '0x32C932442C4b7798204333d40a233Ff2bb54213D'
         },
         WORLDCOIN: {
             APP_ID: 'app_f177c7f33a49a50ca1ce33f8ed9f0909',
@@ -15,7 +15,7 @@ const config = {
             PROYECT_ID: 'afbc50dd45344f9efbad7a3c05239c56'
         },
         CONTRACT: {
-            key: '0xA0dcB46D379e97CC1e4603697bcB6D5383a427B6'
+            key: '0x32C932442C4b7798204333d40a233Ff2bb54213D'
         },
         WORLDCOIN: {
             APP_ID: 'app_f177c7f33a49a50ca1ce33f8ed9f0909',
@@ -26,7 +26,7 @@ const config = {
             PROYECT_ID: 'afbc50dd45344f9efbad7a3c05239c56'
         },
         CONTRACT: {
-            key: '0xA0dcB46D379e97CC1e4603697bcB6D5383a427B6'
+            key: '0x32C932442C4b7798204333d40a233Ff2bb54213D'
         },
         WORLDCOIN: {
             APP_ID: 'app_f177c7f33a49a50ca1ce33f8ed9f0909',
