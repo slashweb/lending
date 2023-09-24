@@ -51,6 +51,24 @@
 			{
 				"inputs": [
 					{
+						"internalType": "bool",
+						"name": "status",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "rentId",
+						"type": "uint256"
+					}
+				],
+				"name": "approveRent",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "string",
 						"name": "_lens",
 						"type": "string"
@@ -274,6 +292,19 @@
 			},
 			{
 				"inputs": [],
+				"name": "getAllRents",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "getOwner",
 				"outputs": [
 					{
@@ -344,6 +375,62 @@
 							}
 						],
 						"internalType": "struct Lending.Product",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "rentId",
+						"type": "uint256"
+					}
+				],
+				"name": "getRent",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "id",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "productId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "owner",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "rentedBy",
+								"type": "string"
+							},
+							{
+								"internalType": "bool",
+								"name": "isApproved",
+								"type": "bool"
+							},
+							{
+								"internalType": "bool",
+								"name": "isReturned",
+								"type": "bool"
+							},
+							{
+								"internalType": "string",
+								"name": "incidence",
+								"type": "string"
+							}
+						],
+						"internalType": "struct Lending.Rent",
 						"name": "",
 						"type": "tuple"
 					}
@@ -600,6 +687,65 @@
 				],
 				"stateMutability": "view",
 				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "lending",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "borowing",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "productId",
+						"type": "uint256"
+					}
+				],
+				"name": "makeRentRequest",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bool",
+						"name": "status",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "rentId",
+						"type": "uint256"
+					}
+				],
+				"name": "returnRent",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_incidence",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "rentId",
+						"type": "uint256"
+					}
+				],
+				"name": "setIncidence",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -630,11 +776,11 @@
 	},
 	"sources": {
 		"Contracts/Lending.sol": {
-			"keccak256": "0xcbb8e6362cb46dbd178084ffe4675d92f3e355bef49738a4b82f528252d7f1fb",
+			"keccak256": "0x8bcd09f2451cac066af8048e8a3efe489ca016b6c193f3c34566e2d1e0205edd",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://f321f4007e23dada807926aacfcfe2338bcd8fb1bc7ca672cdd3f4a52fe2762a",
-				"dweb:/ipfs/QmW7NCPU9Vmh6m3SDWqs6b2X639mJVywreHfwBCZJagwaY"
+				"bzz-raw://54201ba1b29bc7485c842666a2ea4ff1c22e4faacd29047c9e80bf6f27f3067b",
+				"dweb:/ipfs/QmRJTKPGV3PmpU4BAS5xrica7mZwLbUxe6FCeb2hkiZRLm"
 			]
 		}
 	},

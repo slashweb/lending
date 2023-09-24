@@ -38,6 +38,7 @@ contract Lending {
     }
 
     struct Rent {
+        uint id;
         uint productId;
         string owner;
         string rentedBy;
@@ -50,6 +51,8 @@ contract Lending {
     mapping (uint => Product) private Products;
     // General users mapping
     mapping (string => User) private Users;
+    // General rents mapping
+    mapping (uint => Rent) private Rents;
     
     // Indexes to see the user ratings
     mapping (string => uint[]) UserRatings;
@@ -162,17 +165,52 @@ contract Lending {
     function getOwner() external view returns (address) {
         return owner;
     }
+
     function getAllProducts() public view returns (uint[] memory) {
         return allProductsIds;
     }
 
-    /*
+    function getAllRents() public view returns (uint[] memory) {
+        return allRentsIds;
+    }
+
+    
     function makeRentRequest(
         string memory lending, 
-        string memory borowing
-        ) public payable {
-            require
-    }*/
+        string memory borowing,
+        uint productId
+    ) public {
+        Rents[lastRentId] = Rent(
+            lastRentId,
+            productId,
+            lending, 
+            borowing,
+            false,
+            false,
+            ''
+        );
+
+        Users[lending].myLendings.push(Rents[lastRentId].id);
+        Users[borowing].myBorrowings.push(Rents[lastRentId].id);
+        allRentsIds.push(lastRentId);
+        lastRentId ++;
+    }
+
+    function approveRent(bool status, uint rentId) public {
+        Rents[rentId].isApproved = status;
+    }
+
+    function returnRent(bool status, uint rentId) public {
+        Rents[rentId].isReturned = status;
+    }
+
+    function setIncidence(string memory _incidence, uint rentId) public {
+        Rents[rentId].incidence = _incidence;
+    }
+
+    function getRent(uint rentId) public view returns (Rent memory) {
+        return Rents[rentId];
+    }
 
     function createProduct(
         string memory _userId,
@@ -204,7 +242,4 @@ contract Lending {
         allProductsIds.push(lasProductId);
         lasProductId ++;
     }
-
-
-
 } 
