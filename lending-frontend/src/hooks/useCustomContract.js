@@ -1,5 +1,5 @@
 import { environment } from "../utils/environment"
-import { useContractRead, useContractWrite } from 'wagmi'
+import { useContractRead, useContractWrite, useContractReads } from 'wagmi'
 import abi from '../artifacts/abi.json'
 
 const useGetUserById = (id) => {
@@ -13,6 +13,46 @@ const useGetUserById = (id) => {
 
     return {
         getUserById
+    }
+}
+
+const useGetProductById = (id) => {
+    const { refetch } = useContractRead({
+        address: environment.CONTRACT.key,
+        abi: abi.abi,
+        functionName: 'getProductById',
+        args: [id],
+        enabled: false,
+    })
+
+    return {
+        refetch
+    }
+}
+
+const useGetProductsByIds = (ids) => {
+    const baseConfig = {
+        address: environment.CONTRACT.key,
+        abi: abi.abi,
+        functionName: 'getProductById',
+    }
+    
+    const newIds = ids.map((id) => {
+        console.log(typeof(id))
+        return id
+    })
+    
+    console.log(ids)
+
+    const { data } = useContractReads({
+        contracts: ids.map((id) => ({
+            ...baseConfig,
+            args: [id]
+        })),
+    })
+
+    return {
+        data
     }
 }
 
@@ -86,5 +126,29 @@ const useCreateProduct = (userId, latitude, longitude, name, description, produc
     }
 }
 
+const useAssignLensToUser = (userId, handle) => {
+    const { data, write } = useContractWrite({
+        address: environment.CONTRACT.key,
+        abi: abi.abi,
+        functionName: 'assignLensToUser',
+        args: [userId, handle],
+    })
 
-export { useGetUserById, useGetUserByWallet, useCreateAccount, useGetAllProducts, useCreateProduct, useGetCurrentUser }
+    return {
+        data,
+        write
+    }
+}
+
+
+export {
+    useGetUserById,
+    useGetUserByWallet,
+    useCreateAccount,
+    useGetAllProducts,
+    useCreateProduct,
+    useGetCurrentUser,
+    useGetProductById,
+    useGetProductsByIds,
+    useAssignLensToUser,
+}

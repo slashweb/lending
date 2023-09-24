@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  userId: null,
+  profile: null,
   hasAccount: null,
   isLoading: false,
 }
@@ -10,8 +10,8 @@ export const appSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {
-    setUserId: (state, action) => {
-      state.userId = action.payload
+    setProfile: (state, action) => {
+      state.profile = action.payload
     },
     setHasAccount: (state, action) => {
       state.hasAccount = action.payload
@@ -26,6 +26,6 @@ export const appSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { setUserId, setHasAccount, setInitialState, setIsLoading } = appSlice.actions
+export const { setProfile, setHasAccount, setInitialState, setIsLoading } = appSlice.actions
 
 export default appSlice.reducer

@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import CreateUserModal from '../modals/CreateUserModal';
 import { IDKitWidget } from '@worldcoin/idkit'
 import { routes } from '../../App'
+import IntegrateLensModal from '../modals/IntegrateLensModal';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -20,6 +21,7 @@ export default function Navbar() {
   const { openModal, disconnect, isConnected, address, chain, chains, changeNetwork, balance } = useWalletConnect();
   
   const [showCreateAccount, setShowCreateAccount] = useState(false);
+  const [showIntegrateLens, setShowIntegrateLens] = useState(false);
 
   const { userHasAccount } = useSelector((state) => ({
     userHasAccount: state.app.hasAccount,
@@ -38,6 +40,7 @@ export default function Navbar() {
     return (
       <>
       { showCreateAccount && (<CreateUserModal close={() => setShowCreateAccount(false)} />)}
+      { showIntegrateLens && (<IntegrateLensModal close={() => setShowIntegrateLens(false)} />)}
       <Menu as="div" className="relative inline-block text-left mr-2">
           <div>
             <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 bg-indigo-500 rounded-lg text-white">
@@ -109,6 +112,7 @@ export default function Navbar() {
                   {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
                   { routes.map((route) => (
                      <a
+                     key={route.path}
                      href={route.path}
                      className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900"
                    >
@@ -170,6 +174,22 @@ export default function Navbar() {
                                 <button onClick={open} className="mr-2">Verify with World ID </button>
                                 <img width={20} src="https://images.prismic.io/worldcoin-company-website/80f08f79-ecb6-44d9-915f-85d40a9d98b9_logo.png?auto=compress,format"></img></div>}
                               </IDKitWidget>
+                            </a>
+                          )}
+                        </Menu.Item>
+                        <Menu.Item>
+                          {({ active }) => (
+                            <a
+                              onClick={() => setShowIntegrateLens(true)}
+                              className={classNames(
+                                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                'block px-4 py-2 text-sm'
+                              )}
+                            >
+                              <div className='flex'>
+                                <span className='mr-2'>Integrate with Lens</span>
+                                <img width={20} src="https://lens-dev-docs.vercel.app/logo.png"></img>
+                              </div>
                             </a>
                           )}
                         </Menu.Item>

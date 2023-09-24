@@ -6,7 +6,7 @@ import ProductGrid from '../components/ProductGrid';
 const Home = () => {
     return (
         <MainLayout>
-            <ProductGrid />
+            <ProductGrid title={"Products"} />
         </MainLayout>
     );
 };

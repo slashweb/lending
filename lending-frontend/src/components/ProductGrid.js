@@ -53,7 +53,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function ProductGrid() {
+export default function ProductGrid({ title }) {
     const [openProductCreationModal, setOpenProductCreationModal] = useState(false)
 
     const { hasAccount } = useSelector((state) => ({
@@ -74,16 +74,16 @@ export default function ProductGrid() {
       <div className="bg-white">
         <div className="mx-auto max-w-7xl overflow-hidden sm:px-6 lg:px-8">
           <div className='flex justify-between'>
-              <h2 className='font-bold text-3xl mb-10'>Products</h2>
+              <h2 className='font-bold text-3xl mb-10'>{title}</h2>
               {hasAccount && <IconButton onClick={() => {
                   setOpenProductCreationModal(true)
               }}>+</IconButton>}
               {openProductCreationModal && (<CreateProductModal close={() => setOpenProductCreationModal(false)} />)}
           </div>
           <div className="-mx-px grid grid-cols-2 border-l border-gray-200 sm:mx-0 md:grid-cols-3 lg:grid-cols-4">
-            {products.map((product) => (
+            {/* {products.map((product) => (
               <ProductGridItem product={product} key={product.id} />
-            ))}
+            ))} */}
           </div>
         </div>
       </div>

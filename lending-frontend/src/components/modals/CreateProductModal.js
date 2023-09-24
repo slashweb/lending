@@ -19,14 +19,14 @@ export default function CreateProductModal({ close }) {
 
   const dispatch = useDispatch();
 
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
+  const [name, setName] = useState('Bicicleta');
+  const [description, setDescription] = useState('soy una bicicleta');
   const [price, setPrice] = useState(5);
   const [value, setValue] = useState(120);
-  const [imageURL, setImageURL] = useState();
+  const [imageURL, setImageURL] = useState('https://www.oxfordstore.cl/media/catalog/product/cache/e2b750e3a1f8d67cf5cdd4eb0e9445ad/6/0/608bf1219ha080_0_1.jpg');
   const [latitude, setLatitude] = useState('40.74749012267321');
   const [longitude, setLongitude] = useState('-73.9872347180572');
-
+ 
   const { data, write } = useCreateProduct(userId, latitude, longitude, name, description, value, price, imageURL);
 
   const handleCreate = async () => {
@@ -98,7 +98,7 @@ export default function CreateProductModal({ close }) {
                     </div>
                 </div> */}
                 <TextInput label={'Product Name'} onChange={(e) => setName(e.target.value)} value={name} />
-                <TextArea label={'Product Description'} onChange={(e) => setDescription(e.target.value)} value={description} />
+                <TextArea  label={'Product Description'} onChange={(e) => setDescription(e.target.value)} value={description} />
                 <TextInput label={'Product Image URL'} onChange={(e) => setImageURL(e.target.value)} value={imageURL} />
                 <TextInput label={'Latitude'} onChange={(e) => setLatitude(e.target.value)} value={latitude} />
                 <TextInput label={'Longitude'} onChange={(e) => setLongitude(e.target.value)} value={longitude} />

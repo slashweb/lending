@@ -8,6 +8,44 @@
 		{
 			"inputs": [
 				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"name": "allProductsIds",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"name": "allRentsIds",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
 					"internalType": "string",
 					"name": "_lens",
 					"type": "string"
@@ -172,6 +210,16 @@
 							"internalType": "uint256[]",
 							"name": "products",
 							"type": "uint256[]"
+						},
+						{
+							"internalType": "uint256[]",
+							"name": "myLendings",
+							"type": "uint256[]"
+						},
+						{
+							"internalType": "uint256[]",
+							"name": "myBorrowings",
+							"type": "uint256[]"
 						}
 					],
 					"internalType": "struct Lending.User",
@@ -201,6 +249,19 @@
 					"internalType": "bool",
 					"name": "",
 					"type": "bool"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "getAllProducts",
+			"outputs": [
+				{
+					"internalType": "uint256[]",
+					"name": "",
+					"type": "uint256[]"
 				}
 			],
 			"stateMutability": "view",
@@ -316,6 +377,16 @@
 							"internalType": "uint256[]",
 							"name": "products",
 							"type": "uint256[]"
+						},
+						{
+							"internalType": "uint256[]",
+							"name": "myLendings",
+							"type": "uint256[]"
+						},
+						{
+							"internalType": "uint256[]",
+							"name": "myBorrowings",
+							"type": "uint256[]"
 						}
 					],
 					"internalType": "struct Lending.User",
@@ -361,6 +432,16 @@
 						{
 							"internalType": "uint256[]",
 							"name": "products",
+							"type": "uint256[]"
+						},
+						{
+							"internalType": "uint256[]",
+							"name": "myLendings",
+							"type": "uint256[]"
+						},
+						{
+							"internalType": "uint256[]",
+							"name": "myBorrowings",
 							"type": "uint256[]"
 						}
 					],
@@ -408,6 +489,16 @@
 							"internalType": "uint256[]",
 							"name": "products",
 							"type": "uint256[]"
+						},
+						{
+							"internalType": "uint256[]",
+							"name": "myLendings",
+							"type": "uint256[]"
+						},
+						{
+							"internalType": "uint256[]",
+							"name": "myBorrowings",
+							"type": "uint256[]"
 						}
 					],
 					"internalType": "struct Lending.User",
@@ -454,6 +545,16 @@
 							"internalType": "uint256[]",
 							"name": "products",
 							"type": "uint256[]"
+						},
+						{
+							"internalType": "uint256[]",
+							"name": "myLendings",
+							"type": "uint256[]"
+						},
+						{
+							"internalType": "uint256[]",
+							"name": "myBorrowings",
+							"type": "uint256[]"
 						}
 					],
 					"internalType": "struct Lending.User",
@@ -479,14 +580,7 @@
 		},
 		{
 			"inputs": [],
-			"name": "makeRentRequest",
-			"outputs": [],
-			"stateMutability": "nonpayable",
-			"type": "function"
-		},
-		{
-			"inputs": [],
-			"name": "rentsNonce",
+			"name": "lastRentId",
 			"outputs": [
 				{
 					"internalType": "uint256",

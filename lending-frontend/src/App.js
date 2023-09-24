@@ -17,6 +17,11 @@ export const routes = [
     path: '/my-products',
     element: <MyProducts />,
     label: 'My products'
+  },
+  {
+    path: '/product',
+    element: <ProductDetails />,
+    label: 'Product Details'
   }
 ]
 
