@@ -136,6 +136,19 @@ const useAssignLensToUser = (userId, handle) => {
     }
 }
 
+const useAssignWorldCoinIdToUser = (userId, worldCoinId) => {
+    const { data, write, isError, isLoading, isSuccess, error, status, writeAsync } = useContractWrite({
+        address: environment.CONTRACT.key,
+        abi: abi.abi,
+        functionName: 'assignWorldCoinIdToUser',
+    })
+
+    return {
+        data,
+        write,
+    }
+}
+
 
 export {
     useGetUserById,
@@ -147,4 +160,5 @@ export {
     useGetProductById,
     useGetProductsByIds,
     useAssignLensToUser,
+    useAssignWorldCoinIdToUser,
 }

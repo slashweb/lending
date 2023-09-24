@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { CheckIcon, QuestionMarkCircleIcon, StarIcon } from '@heroicons/react/20/solid'
 import { RadioGroup } from '@headlessui/react'
 import { ShieldCheckIcon } from '@heroicons/react/24/outline'
-import { useGetProductById, useGetUserById } from '../hooks/useCustomContract'
+import { useGetProductById, useGetCurrentUser } from '../hooks/useCustomContract'
 import Loader from './Loader'
 
 const reviews = { average: 4, totalCount: 1624 }
@@ -14,9 +14,10 @@ function classNames(...classes) {
 
 export default function ProductDetailItem({ id }) {
   const [product, setProduct] = useState();
-
+  const [owner, setOwner] = useState();
   
   const { refetch } = useGetProductById(id)
+  const { refetch: refetchGetOwner } = useGetCurrentUser(product?.userId);
 
   useEffect(() => {
     refetch().then(res => {
@@ -24,6 +25,13 @@ export default function ProductDetailItem({ id }) {
         setProduct(res.data)
     })
   }, [])
+
+  useEffect(() => {
+    refetchGetOwner().then(res => {
+      console.log('owner', res.data)
+      setOwner(res.data)
+  })
+  }, [product])
 
   if (!product) {
     return <Loader />
@@ -34,12 +42,20 @@ export default function ProductDetailItem({ id }) {
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
         {/* Product details */}
         <div className="lg:max-w-lg lg:self-end">
-          
-
           <div className="mt-4">
             <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
               {product.name}
             </h1>
+            {owner && owner.worldCoinId !== '' &&
+              <div className='flex border-2 border-blue-800 p-2 mt-2 rounded-md justify-between	'>
+                <span className='text-blue-800'>Human verified by Worldcoin ID</span>
+                <ShieldCheckIcon
+                      className="mr-2 h-6 w-6 flex-shrink-0 text-blue-800 ml-4"
+                      aria-hidden="true"
+                      color='text-blue-800'
+                />
+              </div>
+            }
           </div>
 
           <section aria-labelledby="information-heading" className="mt-4">
@@ -112,14 +128,6 @@ export default function ProductDetailItem({ id }) {
                 >
                   Rent product
                 </button>
-              </div>
-              <div className="mt-6 text-center">
-                <a href="#" className="group inline-flex text-base font-medium">
-                  <ShieldCheckIcon
-                    className="mr-2 h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
-                    aria-hidden="true"
-                  />
-                </a>
               </div>
             </form>
           </section>
