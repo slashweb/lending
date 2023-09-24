@@ -4,7 +4,7 @@ import TextInput from '../TextInput'
 import CustomButton from '../CustomButton'
 import useWalletConnect from "../../hooks/useWalletConnect";
 import TextArea from '../TextArea';
-import { useCreateProduct } from "../../hooks/useCustomContract";
+import { useCreateProduct, useGetCurrentUser } from "../../hooks/useCustomContract";
 import { useSelector, useDispatch } from 'react-redux';
 import { setIsLoading } from '../../redux/reducers/app';
 
@@ -14,7 +14,7 @@ export default function CreateProductModal({ close }) {
   const { address } = useWalletConnect();
 
   const { userId } = useSelector((state) => ({
-    userId: state.app.userId
+    userId: state.app.profile.userId
   }))
 
   const dispatch = useDispatch();
@@ -27,14 +27,13 @@ export default function CreateProductModal({ close }) {
   const [latitude, setLatitude] = useState('40.74749012267321');
   const [longitude, setLongitude] = useState('-73.9872347180572');
  
-  const { data, write } = useCreateProduct(userId, latitude, longitude, name, description, value, price, imageURL);
-
+  const { data, write } = useCreateProduct(userId, latitude, longitude, name, description, value, price, imageURL);  
+  
   const handleCreate = async () => {
     dispatch(setIsLoading(true));
     try {
       await write({
         onSuccess: () => {
-          console.log('finished created product')
           close?.();
         },
       });
@@ -43,9 +42,12 @@ export default function CreateProductModal({ close }) {
     }
   }
 
+
   useEffect(() => {
     if (data) {
       dispatch(setIsLoading(false));
+    
+      
       close?.();
     }
   }, [data])

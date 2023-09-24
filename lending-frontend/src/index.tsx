@@ -15,9 +15,11 @@ import {
 } from 'wagmi/chains'
 import { environment } from './utils/environment.js';
 import { Provider } from 'react-redux'
-import store from './redux/store';
+import {store, persistor} from './redux/store';
 import { LensConfig, development, production, LensProvider } from '@lens-protocol/react-web';
 import { bindings as wagmiBindings } from '@lens-protocol/wagmi';
+import { PersistGate } from 'redux-persist/integration/react';
+
 
 const lensConfig: LensConfig = {
   bindings: wagmiBindings(),
@@ -44,11 +46,13 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <WagmiConfig config={wagmiConfig}>
-        <LensProvider config={lensConfig}>
-          <App />
-        </LensProvider>
-      </WagmiConfig>
+      <PersistGate persistor={persistor}>
+        <WagmiConfig config={wagmiConfig}>
+          <LensProvider config={lensConfig}>
+            <App />
+          </LensProvider>
+        </WagmiConfig>
+      </PersistGate>
     </Provider>
   </React.StrictMode>
 );

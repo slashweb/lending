@@ -30,6 +30,16 @@ const useGetProductById = (id) => {
     }
 }
 
+const useGetAllProducts = () => {
+    const { data } = useContractRead({
+        address: environment.CONTRACT.key,
+        abi: abi.abi,
+        functionName: 'getAllProducts',
+    })
+
+    return { data }
+}
+
 const useGetProductsByIds = (ids) => {
     const baseConfig = {
         address: environment.CONTRACT.key,
@@ -63,19 +73,6 @@ const useGetUserByWallet = (wallet) => {
     }
 }
 
-const useGetAllProducts = () => {
-    const { refetch } = useContractRead({
-        address: environment.CONTRACT.key,
-        abi: abi.abi,
-        functionName: 'getAllProducts',
-        args: [],
-        enabled: false,
-    })
-
-    return {
-        refetch
-    }
-}
 
 const useGetCurrentUser = (userId) => {
     const { refetch } = useContractRead({

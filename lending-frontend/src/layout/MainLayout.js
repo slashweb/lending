@@ -12,25 +12,32 @@ import Loader from "../components/Loader";
 export default function MainLayout({ children }) {
     const { address } = useWalletConnect();
 
-    const { userId, hasAccount } = useSelector((state) => ({
-        userId: state.app.userId,
+    const { profile, hasAccount } = useSelector((state) => ({
+        profile: state.app.profile,
         hasAccount: state.app.hasAccount,
     }))
 
+    const userId = profile.userId;
     const dispatch = useDispatch();
 
-    const getUserByWallet = useGetUserByWallet(address);
-    const getCurrentUser = useGetCurrentUser(userId);
+    const { refetch } = useGetCurrentUser(profile.userId)
+
 
     useEffect(() => {
-        getCurrentUser.refetch().then((resp) => {
-            dispatch(setProfile(resp.data));
-        });
-        //dispatch(setInitialState());
-        if (!userId && address) {
-            getUserByWallet.refetch().then((resp) => {
+        refetch().then(res => {
+            const newProfile = res.data 
+            newProfile.products = newProfile.products.map(id => Number(id)) || [] 
+            //dispatch(setProfile(newProfile));
+        })
+    }, [])
+
+    useEffect(() => {
+        if (!userId && address) {   
+            refetch().then((resp) => {
                 const { data } = resp;
+                console.log('data here', data, resp)
                 if (data.wallets.length > 0) {
+                    console.log('was here')
                     dispatch(setHasAccount(true));
                     dispatch(setProfile(data));
                 }
