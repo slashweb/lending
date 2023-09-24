@@ -7,6 +7,7 @@ import { useAssignLensToUser } from "../../hooks/useCustomContract";
 import useWalletConnect from "../../hooks/useWalletConnect";
 import { useDispatch, useSelector } from 'react-redux';
 import { setIsLoading } from '../../redux/reducers/app';
+import LensAuth from '../LensAuth'
 
 export default function IntegrateLensModal({ close }) {
   const [open, setOpen] = useState(true)
@@ -17,7 +18,7 @@ export default function IntegrateLensModal({ close }) {
     userId: state.app.profile.userId
   }))
 
-  const { data, write, isError, isSuccess, error, writeAsync, status } = useAssignLensToUser(userId, handle);
+  const { data, writeAsync, isError, isSuccess, error, status } = useAssignLensToUser();
 
   const dispatch = useDispatch();
 
@@ -28,11 +29,14 @@ export default function IntegrateLensModal({ close }) {
     }
   }, [isError, status])
 
-  const handleAssign = async () => {
+  const handleAssign = async (_handle = 'lensprotocol.test') => {
+    console.log('before', _handle)
     dispatch(setIsLoading(true));
 
     try {
-      const result = await writeAsync();
+      const result = await writeAsync({
+        args: [handle, userId]
+      });
       console.log({
         a: result
       })
@@ -74,18 +78,29 @@ export default function IntegrateLensModal({ close }) {
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
-                <TextInput label={'Handle'} onChange={(e) => setHandle(e.target.value)} value={handle} />
+              <Dialog.Panel className="display-none relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
+                <TextInput
+                  label={"Handle"}
+                  onChange={(e) => setHandle(e.target.value)}
+                  value={handle}
+                />
+
                 <div className="mt-5 sm:mt-6">
-                  <CustomButton disabled={!handle.length} onClick={handleAssign}>
+                  <CustomButton
+                    disabled={!handle.length}
+                    onClick={() => handleAssign(handle)}
+                  >
                     Integrate with Lens
                   </CustomButton>
                 </div>
+
+                <LensAuth
+                  onAuth={(value) => handleAssign(value)} />
               </Dialog.Panel>
             </Transition.Child>
           </div>
         </div>
       </Dialog>
     </Transition.Root>
-  )
+  );
 }

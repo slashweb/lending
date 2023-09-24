@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Navbar from "../components/navbar/Navbar";
 
 import { useSelector, useDispatch } from 'react-redux';
-import { setProfile, setHasAccount, setInitialState } from '../redux/reducers/app';
+import { setProfile, setHasAccount, setInitialState, setIsLoading } from '../redux/reducers/app';
 import { useGetUserById, useGetUserByWallet, useGetCurrentUser, useAssignWorldCoinIdToUser } from "../hooks/useCustomContract";
 import { useState } from "react";
 // import Contract from "../components/Contract";
@@ -14,12 +14,13 @@ import { IDKitWidget } from '@worldcoin/idkit'
 
 export default function MainLayout({ children }) {
     const { address } = useWalletConnect();
+    const dispatch = useDispatch();
 
     const { profile, hasAccount } = useSelector((state) => ({
         profile: state.app.profile,
         hasAccount: state.app.hasAccount,
     }))
-
+    
     const { write } = useAssignWorldCoinIdToUser();
 
     const handleSuccess = async (data) => {
@@ -37,7 +38,8 @@ export default function MainLayout({ children }) {
     }
 
     const userId = profile.userId;
-    const dispatch = useDispatch();
+    
+    
 
     const { refetch } = useGetCurrentUser(profile.userId);
     
@@ -45,7 +47,7 @@ export default function MainLayout({ children }) {
 
     useEffect(() => {
         refetch?.().then(res => {
-            const newProfile = { ...res.data }
+            const newProfile = { products: [], ...res.data }
             if (!newProfile) return;
 
             newProfile.products = newProfile?.products.map(id => Number(id));
@@ -55,12 +57,13 @@ export default function MainLayout({ children }) {
 
     useEffect(() => {
         if (!userId && address) {   
-            
             usrByWallet.refetch().then((resp) => {
                 const { data } = resp;
                 if (data.wallets.length > 0) {
                     dispatch(setHasAccount(true));
                     dispatch(setProfile(data));
+                } else {
+                    dispatch(setHasAccount(false));
                 }
             }).catch((err) => {
                 console.log({ err })

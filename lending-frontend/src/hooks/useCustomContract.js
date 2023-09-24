@@ -59,6 +59,25 @@ const useGetProductsByIds = (ids) => {
     }
 }
 
+const useGetRentsByIds = (ids) => {
+    const baseConfig = {
+        address: environment.CONTRACT.key,
+        abi: abi.abi,
+        functionName: 'getRent',
+    }
+
+    const { data } = useContractReads({
+        contracts: ids.map((id) => ({
+            ...baseConfig,
+            args: [id]
+        })),
+    })
+
+    return {
+        data
+    }
+}
+
 const useGetUserByWallet = (wallet) => {
     const { refetch } = useContractRead({
         address: environment.CONTRACT.key,
@@ -116,12 +135,11 @@ const useCreateProduct = (userId, latitude, longitude, name, description, produc
     }
 }
 
-const useAssignLensToUser = (userId, handle) => {
+const useAssignLensToUser = () => {
     const { data, write, isError, isLoading, isSuccess, error, status, writeAsync } = useContractWrite({
         address: environment.CONTRACT.key,
         abi: abi.abi,
         functionName: 'assignLensToUser',
-        args: [handle, userId],
     })
 
     return {
@@ -149,6 +167,47 @@ const useAssignWorldCoinIdToUser = (userId, worldCoinId) => {
     }
 }
 
+const useMakeRentRequest = () => {
+    const { data, write } = useContractWrite({
+        address: environment.CONTRACT.key,
+        abi: abi.abi,
+        functionName: 'makeRentRequest',
+    })
+
+    return {
+        data,
+        write,
+    }
+}
+
+const useApproveRent = (rentId) => {
+    const { data, write } = useContractWrite({
+        address: environment.CONTRACT.key,
+        abi: abi.abi,
+        functionName: 'approveRent',
+        args: [true, rentId],
+    })
+
+    return {
+        data,
+        write
+    }
+}
+
+const useReturnRent = (rentId) => {
+    const { data, write } = useContractWrite({
+        address: environment.CONTRACT.key,
+        abi: abi.abi,
+        functionName: 'returnRent',
+        args: [true, rentId],
+    })
+
+    return {
+        data,
+        write
+    }
+}
+
 
 export {
     useGetUserById,
@@ -161,4 +220,8 @@ export {
     useGetProductsByIds,
     useAssignLensToUser,
     useAssignWorldCoinIdToUser,
+    useMakeRentRequest,
+    useGetRentsByIds,
+    useApproveRent,
+    useReturnRent,
 }

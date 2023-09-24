@@ -23,7 +23,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 const lensConfig: LensConfig = {
   bindings: wagmiBindings(),
-  environment: production,
+  environment: development,
 };
 
 const chains = [

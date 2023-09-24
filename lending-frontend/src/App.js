@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from './pages/Home';
 import ProductDetails from './pages/ProuctDetails';
 import MyProducts from './pages/MyProducts';
+import Rents from './pages/Rents';
 
 export const routes = [
   {
@@ -25,6 +26,12 @@ export const routes = [
     element: <ProductDetails />,
     label: 'Product',
     enableInNavbar: false,
+  },
+  {
+    path: '/rents',
+    element: <Rents />,
+    label: 'Rent',
+    enableInNavbar: true,
   }
 ]
 
