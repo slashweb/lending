@@ -5,6 +5,7 @@ import { RadioGroup } from '@headlessui/react'
 import { ShieldCheckIcon } from '@heroicons/react/24/outline'
 import { useGetProductById, useGetCurrentUser } from '../hooks/useCustomContract'
 import Loader from './Loader'
+import UserLens from './UserLens'
 
 const reviews = { average: 4, totalCount: 1624 }
 
@@ -39,7 +40,7 @@ export default function ProductDetailItem({ id }) {
 
   return (
     <div className="bg-white">
-      <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
+      <div className="mx-auto max-w-2xl px-4 sm:px-6 sm:py-24 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
         {/* Product details */}
         <div className="lg:max-w-lg lg:self-end">
           <div className="mt-4">
@@ -133,6 +134,10 @@ export default function ProductDetailItem({ id }) {
           </section>
         </div>
       </div>
+
+       {/* Lens */}
+      <UserLens handle={owner?.lensHandle} />
+      
     </div>
   );
 }
