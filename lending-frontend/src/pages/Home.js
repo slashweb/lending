@@ -12,19 +12,14 @@ const Home = () => {
     const { profile } = useSelector(state => ({ profile: state.app.profile }))
     const { data } = useGetAllProducts() 
     let products = []
-    const ids = data.map(id => Number(id)).filter(id => !profile.products.includes(id))
+    console.log({ profile })
+    const ids = Array.isArray(data) ? data.map(id => Number(id)).filter(id => !profile?.products.includes(id)) : []
     const {data: responses} = useGetProductsByIds(ids)
 
     if (data) {
-        
-        
         if (Array.isArray(responses))
         products = responses.map(res => res.result) || []
     }
-    
-
-
-    
 
     return (
       <MainLayout>

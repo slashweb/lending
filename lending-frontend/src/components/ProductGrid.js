@@ -8,7 +8,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function ProductGrid({ title, products }) {
+export default function ProductGrid({ title, products = [] }) {
     
     const { hasAccount } = useSelector((state) => ({
         hasAccount: state.app.hasAccount,

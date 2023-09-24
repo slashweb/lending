@@ -9,7 +9,6 @@ import abi from '../../artifacts/abi.json'
 import { useContractWrite, useContractRead } from 'wagmi'
 import { useSelector } from 'react-redux';
 import CreateUserModal from '../modals/CreateUserModal';
-import { IDKitWidget } from '@worldcoin/idkit'
 import { routes } from '../../App'
 import IntegrateLensModal from '../modals/IntegrateLensModal';
 import IconButton from '../IconButton';
@@ -29,14 +28,6 @@ export default function Navbar() {
   const { userHasAccount } = useSelector((state) => ({
     userHasAccount: state.app.hasAccount,
   }))
-
-  const handleSuccess = (data) => {
-    console.log('handleSuccess', { data })
-  }
-
-  const handleVerify = (data) => {
-    console.log('handleVerify', { data })
-  }
 
   const renderNetworkMenu = () => {
     if (!chain) return null;
@@ -211,25 +202,7 @@ export default function Navbar() {
                                     "block px-4 py-2 text-sm"
                                   )}
                                 >
-                                  <IDKitWidget
-                                    app_id={environment.WORLDCOIN.APP_ID}
-                                    action="some-action"
-                                    onSuccess={handleSuccess}
-                                    handleVerify={handleVerify}
-                                    credential_types={["orb"]}
-                                  >
-                                    {({ open }) => (
-                                      <div className="flex">
-                                        <button onClick={open} className="mr-2">
-                                          Verify with World ID{" "}
-                                        </button>
-                                        <img
-                                          width={20}
-                                          src="https://images.prismic.io/worldcoin-company-website/80f08f79-ecb6-44d9-915f-85d40a9d98b9_logo.png?auto=compress,format"
-                                        ></img>
-                                      </div>
-                                    )}
-                                  </IDKitWidget>
+                                  
                                 </a>
                               )}
                             </Menu.Item>

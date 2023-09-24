@@ -14,6 +14,7 @@ function classNames(...classes) {
 }
 
 export default function ProductGridItem({ product }) {
+    if (!product) return null;
     return (
       <Link to={`/product/${product.id}`}>
         <div className="relative border-b border-r border-gray-200 p-4 sm:p-6">
