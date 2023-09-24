@@ -73,7 +73,7 @@ contract Lending {
         if (bytes(a).length != bytes(b).length) {
             return false;
         } else {
-            for (uint256 i = 0; i < bytes(a).length; i++) {
+            for (uint i = 0; i < bytes(a).length; i++) {
                 if (bytes(a)[i] != bytes(b)[i]) {
                     return false;
                 }
@@ -112,10 +112,8 @@ contract Lending {
     }
 
     function assignLensToUser(string memory _lens, string memory userId) public {
-        if (!doesKeyExist(_lens, 'userLens')) {
-            UserLensHandles[_lens] = userId;
-            Users[userId].lensHandle = _lens;
-        }
+        UserLensHandles[_lens] = userId;
+        Users[userId].lensHandle = _lens;
     }
 
     function assignWorldCoinIdToUser(string memory WCID, string memory userId) public {
