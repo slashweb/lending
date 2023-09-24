@@ -1,30 +1,29 @@
 import { useState, useEffect } from 'react'
 import { useWeb3Modal } from '@web3modal/wagmi/react'
-import { useAccount, useDisconnect, useBalance, useNetwork } from 'wagmi'
+import { useAccount, useDisconnect, useNetwork } from 'wagmi'
 import { fetchBalance } from '@wagmi/core'
 import { useSwitchNetwork } from 'wagmi'
 
 const useWalletConnect = () => {
     const { open: openModal } = useWeb3Modal();
-    const { address, isConnected, isDisconnected, } = useAccount();
+    const { address, isConnected, isDisconnected } = useAccount();
     const { disconnect } = useDisconnect();
-    const [balance, setBalance] = useState<string>('0');
+    const [balance, setBalance] = useState('0');
     const { chain, chains } = useNetwork();
     const { switchNetwork } = useSwitchNetwork()
 
     useEffect(() => {
         if (address) getBalance(address);
-    }, [address, chain])
+    }, [address, chain]);
 
-    const getBalance = async (address: `0x${string}`) => {
+    const getBalance = async (address) => {
         const balance = await fetchBalance({ address })
         setBalance(`${balance.formatted.slice(0, 8)} ${balance.symbol}`);
     }
 
-    const changeNetwork = async (chainId: number) => {
+    const changeNetwork = async (chainId) => {
         switchNetwork?.(chainId)
     }
-
 
     return {
         openModal,

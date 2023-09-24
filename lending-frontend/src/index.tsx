@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import App from './App.js';
 import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi/react'
 import { WagmiConfig } from 'wagmi'
 import { 
@@ -13,7 +13,18 @@ import {
   gnosis,
   gnosisChiado,
 } from 'wagmi/chains'
-import { environment } from './utils/environment';
+import { environment } from './utils/environment.js';
+import { Provider } from 'react-redux'
+import {store, persistor} from './redux/store';
+import { LensConfig, development, production, LensProvider } from '@lens-protocol/react-web';
+import { bindings as wagmiBindings } from '@lens-protocol/wagmi';
+import { PersistGate } from 'redux-persist/integration/react';
+
+
+const lensConfig: LensConfig = {
+  bindings: wagmiBindings(),
+  environment: production,
+};
 
 const chains = [
   mainnet,
@@ -34,8 +45,14 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <WagmiConfig config={wagmiConfig}>
-      <App />
-    </WagmiConfig>
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
+        <WagmiConfig config={wagmiConfig}>
+          <LensProvider config={lensConfig}>
+            <App />
+          </LensProvider>
+        </WagmiConfig>
+      </PersistGate>
+    </Provider>
   </React.StrictMode>
 );
