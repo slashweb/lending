@@ -109,13 +109,13 @@ export default function Navbar() {
                 <div className="flex flex-shrink-0 items-center">
                   <img
                     className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                    src="https://res.cloudinary.com/ds3jemli8/image/upload/v1695521924/bamboo_verde_naf5jw.png"
                     alt="Your Company"
                   />
                 </div>
                 <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                   {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
-                  {routes.map((route) => (
+                  {routes.filter((route) => route.enableInNavbar).map((route) => (
                     <a
                       key={route.path}
                       href={route.path}

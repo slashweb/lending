@@ -3,7 +3,7 @@ import Navbar from "../components/navbar/Navbar";
 
 import { useSelector, useDispatch } from 'react-redux';
 import { setProfile, setHasAccount, setInitialState } from '../redux/reducers/app';
-import { useGetUserById, useGetUserByWallet, useGetCurrentUser } from "../hooks/useCustomContract";
+import { useGetUserById, useGetUserByWallet, useGetCurrentUser, useAssignWorldCoinIdToUser } from "../hooks/useCustomContract";
 import { useState } from "react";
 // import Contract from "../components/Contract";
 import useWalletConnect from "../hooks/useWalletConnect";
@@ -11,7 +11,6 @@ import Loader from "../components/Loader";
 import IconButton from "../components/IconButton";
 import { environment } from "../utils/environment";
 import { IDKitWidget } from '@worldcoin/idkit'
-
 
 export default function MainLayout({ children }) {
     const { address } = useWalletConnect();
@@ -21,8 +20,16 @@ export default function MainLayout({ children }) {
         hasAccount: state.app.hasAccount,
     }))
 
-    const handleSuccess = (data) => {
-        console.log('handleSuccess', { data })
+    const { write } = useAssignWorldCoinIdToUser();
+
+    const handleSuccess = async (data) => {
+        const worldCoinId = data.merkle_root || null;
+        if (profile && profile.userId && worldCoinId) {
+            console.log(worldCoinId, profile.userId)
+            await write({
+                args: [worldCoinId, profile.userId]
+            })
+        }
     }
 
     const handleVerify = (data) => {
@@ -32,18 +39,16 @@ export default function MainLayout({ children }) {
     const userId = profile.userId;
     const dispatch = useDispatch();
 
-
     const { refetch } = useGetCurrentUser(profile.userId);
     
     const usrByWallet = useGetUserByWallet(address)
 
-
     useEffect(() => {
         refetch?.().then(res => {
-            const newProfile = res.data 
+            const newProfile = { ...res.data }
             if (!newProfile) return;
-            
-            newProfile.products = newProfile?.products.map(id => Number(id)) ?? [] 
+
+            newProfile.products = newProfile?.products.map(id => Number(id));
             dispatch(setProfile(newProfile));
         })
     }, [])
@@ -75,7 +80,7 @@ export default function MainLayout({ children }) {
                     onSuccess={handleSuccess}
                     handleVerify={handleVerify}
                     credential_types={["orb"]}
-                    >
+                >
                     {({ open }) => (
                         <div className="fixed right-10 bottom-10 p-2 bg-green-200 w-10 rounded-full justify-center" onClick={open}>
                             <img
@@ -85,7 +90,7 @@ export default function MainLayout({ children }) {
                             ></img>
                         </div>
                     )}
-                    </IDKitWidget>
+                </IDKitWidget>
             </div>
         </>
     )

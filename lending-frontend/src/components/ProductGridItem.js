@@ -3,11 +3,12 @@ import { StarIcon } from '@heroicons/react/20/solid'
 import IconButton from './IconButton'
 import CreateProductModal from './modals/CreateProductModal'
 import { useSelector } from 'react-redux';
-import { useGetAllProducts } from '../hooks/useCustomContract';
+import { useGetCurrentUser } from '../hooks/useCustomContract';
 import CustomButton from './CustomButton';
 import { useDispatch } from 'react-redux';
 import { setProduct } from '../redux/reducers/lending';
 import { Link } from "react-router-dom";
+import { ShieldCheckIcon } from '@heroicons/react/24/outline'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -15,6 +16,16 @@ function classNames(...classes) {
 
 export default function ProductGridItem({ product }) {
     if (!product) return null;
+    const [owner, setOwner] = useState();
+
+    const { refetch: refetchGetOwner } = useGetCurrentUser(product?.userId);
+    useEffect(() => {
+      refetchGetOwner().then(res => {
+        console.log('owner', res.data)
+        setOwner(res.data)
+    })
+    }, [product])
+
     return (
       <Link to={`/product/${product.id}`}>
         <div className="relative border-b border-r border-gray-200 p-4 sm:p-6">
@@ -31,6 +42,16 @@ export default function ProductGridItem({ product }) {
                 {product.name} -
                 {product.description}
             </h3>
+            {owner && owner.worldCoinId !== '' &&
+              <div className='flex border-2 border-blue-800 p-2 mt-2 rounded-md justify-between items-center'>
+                <span className='text-blue-800'>Human verified by Worldcoin ID</span>
+                <ShieldCheckIcon
+                      className="mr-2 h-6 w-6 flex-shrink-0 text-blue-800 ml-4"
+                      aria-hidden="true"
+                      color='text-blue-800'
+                />
+              </div>
+            }
             <div className="mt-3 flex flex-col items-center">
               <p className="sr-only">{product.rating} out of 5 stars</p>
               <CustomButton>
