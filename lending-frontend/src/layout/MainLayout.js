@@ -23,6 +23,9 @@ export default function MainLayout({ children }) {
     const getCurrentUser = useGetCurrentUser(userId);
 
     useEffect(() => {
+        getCurrentUser.refetch().then((resp) => {
+            dispatch(setProfile(resp.data));
+        });
         //dispatch(setInitialState());
         if (!userId && address) {
             getUserByWallet.refetch().then((resp) => {

@@ -36,13 +36,6 @@ const useGetProductsByIds = (ids) => {
         abi: abi.abi,
         functionName: 'getProductById',
     }
-    
-    const newIds = ids.map((id) => {
-        console.log(typeof(id))
-        return id
-    })
-    
-    console.log(ids)
 
     const { data } = useContractReads({
         contracts: ids.map((id) => ({
@@ -127,16 +120,22 @@ const useCreateProduct = (userId, latitude, longitude, name, description, produc
 }
 
 const useAssignLensToUser = (userId, handle) => {
-    const { data, write } = useContractWrite({
+    const { data, write, isError, isLoading, isSuccess, error, status, writeAsync } = useContractWrite({
         address: environment.CONTRACT.key,
         abi: abi.abi,
         functionName: 'assignLensToUser',
-        args: [userId, handle],
+        args: [handle, userId],
     })
 
     return {
         data,
-        write
+        write,
+        isError,
+        isLoading,
+        isSuccess,
+        error,
+        status,
+        writeAsync,
     }
 }
 

@@ -13,11 +13,9 @@ const MyProducts = () => {
     }))
     const dispatch = useDispatch();
     
-    console.log('ccc', profile);
-
     if (profile && profile.products) {
     
-        const { data } = useGetProductsByIds(profile.products);
+        // const { data } = useGetProductsByIds(profile.products);
         //const products = data.map((item) => item.result);
         //console.log('aaaa,',{ products })
         //dispatch(setUserProducts(products));

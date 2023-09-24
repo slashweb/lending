@@ -17,21 +17,25 @@ export default function IntegrateLensModal({ close }) {
     userId: state.app.profile.userId
   }))
 
-  const { data, write } = useAssignLensToUser(userId, handle);
+  const { data, write, isError, isSuccess, error, writeAsync, status } = useAssignLensToUser(userId, handle);
 
   const dispatch = useDispatch();
 
-  const handleCreate = async () => {
+  useEffect(() => {
+    if (isError || isSuccess) {
+      dispatch(setIsLoading(false));
+      close?.();
+    }
+  }, [isError, status])
+
+  const handleAssign = async () => {
     dispatch(setIsLoading(true));
 
     try {
-      await write({
-        onSuccess: () => {
-          console.log('finished')
-          dispatch(setIsLoading(false));
-          close?.();
-        },
-      });
+      const result = await writeAsync();
+      console.log({
+        a: result
+      })
     } catch (e) {
       console.log(e)
     }
@@ -73,7 +77,7 @@ export default function IntegrateLensModal({ close }) {
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
                 <TextInput label={'Handle'} onChange={(e) => setHandle(e.target.value)} value={handle} />
                 <div className="mt-5 sm:mt-6">
-                  <CustomButton disabled={!handle.length} onClick={handleCreate}>
+                  <CustomButton disabled={!handle.length} onClick={handleAssign}>
                     Integrate with Lens
                   </CustomButton>
                 </div>
